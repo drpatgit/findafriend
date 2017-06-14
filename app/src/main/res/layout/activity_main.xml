@@ -31,10 +31,6 @@
         app:layout_anchorGravity="bottom|right"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
-
     <ToggleButton
         android:id="@+id/toggleButton2"
         android:layout_width="wrap_content"
@@ -43,5 +39,9 @@
         android:text="ToggleButton"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="bottom|left" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -72,12 +72,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 0){
             if(resultCode == Activity.RESULT_OK){
-                String friend = data.getStringExtra("result");
-                if(friends.contains(friend)){
+                Friend f = (Friend)data.getSerializableExtra("result");
+                //String friend = data.getStringExtra("result");
+                if(friends.contains(f.getName())){
                     Snackbar.make(this.findViewById(android.R.id.content), "Friend already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     return;
                 }
-                friends.add(friend);
+                friends.add(f.getName());
                 adapter.notifyDataSetChanged();
                 Snackbar.make(this.findViewById(android.R.id.content), "Friend added successfully!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 return;

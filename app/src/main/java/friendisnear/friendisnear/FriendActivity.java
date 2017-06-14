@@ -29,7 +29,7 @@ public class FriendActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!editText10.getText().toString().equals("")){
                     Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result", editText10.getText().toString());
+                    returnIntent.putExtra("result", new Friend(editText10.getText().toString()));
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
                 finish();
