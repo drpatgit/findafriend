@@ -1,7 +1,13 @@
 package friendisnear.friendisnear;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,23 +21,31 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import friendisnear.friendisnear.LocationService.LocationBinder;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public LinkedList<String> friends;
-    public ArrayAdapter<String> adapter;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+    public ArrayList<Friend> friends;
+    public FriendAdapter adapter;
+    private LocationService locationService;
+
+    private Intent locationIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        friends = new LinkedList<>();
+        friends = new ArrayList<>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, friends);
+        adapter = new FriendAdapter(this, friends);
         listView.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -43,7 +57,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+        }
+
+        if(locationIntent==null){
+            locationIntent = new Intent(this, LocationService.class);
+            bindService(locationIntent, locationConnection, Context.BIND_AUTO_CREATE);
+            startService(locationIntent);
+        }
+    }
+
+    //connect to the service
+    private ServiceConnection locationConnection = new ServiceConnection(){
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LocationBinder binder = (LocationBinder)service;
+            //get service
+
+            locationService = binder.getService();
+            locationService.initStartService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void updateLocation(View view) {
+        if(locationService != null) locationService.updateLocation();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -78,7 +130,9 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(this.findViewById(android.R.id.content), "Friend already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     return;
                 }
-                friends.add(f.getName());
+
+                friends.add(f);
+                if(locationService != null) locationService.setUpdateListener(f);
                 adapter.notifyDataSetChanged();
                 Snackbar.make(this.findViewById(android.R.id.content), "Friend added successfully!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 return;
