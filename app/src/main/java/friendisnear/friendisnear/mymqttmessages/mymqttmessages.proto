@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package mymqttmessages;
+
+option java_package = "friendisnear.friendisnear.mymqttmessages";
+option java_outer_classname = "ProtobufMessages";
+
+
+
+message PBMessage {
+	required uint32 source = 1;
+	
+	oneof msgtype {
+		PBGenericLocation location = 101;
+		PBGenericText text = 102; 		
+	}
+}
+
+message PBGenericLocation {
+	required int64 time = 1;
+	required double latidude = 2;
+	required double longitude = 3;
+	required float speed = 4;
+}
+
+message PBGenericText {
+	required string text = 1;
+	required string sender = 2;
+}
