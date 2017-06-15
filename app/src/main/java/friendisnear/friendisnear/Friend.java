@@ -13,12 +13,23 @@ import java.io.StringReader;
 public class Friend implements Serializable {
     private String name;
     private Location location;
+    private Location oldLocation;
 
     public Friend(String name) {
         this.name = name;
     }
 
-    public void setLocation(Location location) { this.location = location;}
+    public void setLocation(Location location) {
+
+        this.location = location;
+
+    }
+
+    public float getDistanceToOld() {
+        oldLocation = this.location;
+        if(location != null && oldLocation != null) return location.distanceTo(oldLocation);
+        return 0;
+    }
 
     public Location getLocation() {return location;}
 

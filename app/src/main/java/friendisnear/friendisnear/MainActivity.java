@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateLocation(View view) {
         if(locationService != null) locationService.updateLocation();
+        adapter.notifyDataSetChanged();
+
     }
 
     @Override

@@ -49,11 +49,15 @@ public class FriendAdapter extends BaseAdapter {
         //get title and artist views
         TextView friendName = (TextView)friendLay.findViewById(R.id.friend_name);
         TextView friendLocation = (TextView)friendLay.findViewById(R.id.friend_location);
+        TextView friendDistance = (TextView)friendLay.findViewById(R.id.friend_distance);
         //get song using position
         Friend currFriend = friends.get(position);
         //get title and artist strings
         friendName.setText(currFriend.getName());
-        if(currFriend.getLocation() != null) friendLocation.setText(currFriend.getLocation().toString());
+        if(currFriend.getLocation() != null) {
+            friendLocation.setText(currFriend.getLocation().toString());
+            friendDistance.setText(String.valueOf(currFriend.getDistanceToOld()));
+        }
         else friendLocation.setText("");
         //set position as tag
         friendLay.setTag(position);
