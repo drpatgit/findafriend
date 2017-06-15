@@ -26,9 +26,11 @@ public class Friend implements Serializable {
     }
 
     public float getDistanceToOld() {
+        float result = 0;
+        if(location != null && oldLocation != null) result = location.distanceTo(oldLocation);
         oldLocation = this.location;
-        if(location != null && oldLocation != null) return location.distanceTo(oldLocation);
-        return 0;
+
+        return result;
     }
 
     public Location getLocation() {return location;}

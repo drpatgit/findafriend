@@ -20,7 +20,7 @@ import java.util.TimerTask;
 
 public class LocationService extends Service {
 
-    public static int LOCATION_REFRESH_TIME = 1000;
+    public static int LOCATION_REFRESH_TIME = 1000*10;
     public static int LOCATION_REFRESH_DISTANCE = 5;
 
     private Handler handler;
@@ -64,7 +64,7 @@ public class LocationService extends Service {
                     mLocationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, mLocationListener,null);
                 }
             }
-            handler.postDelayed(locationRequest, 10000);
+            handler.postDelayed(locationRequest, LOCATION_REFRESH_TIME);
         }
     };
 

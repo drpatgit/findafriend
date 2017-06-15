@@ -28,11 +28,15 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
+    final private int REQUEST_ADD_FRIEND = 0;
+    final private int REQUEST_SETTINGS = 1;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     public ArrayList<Friend> friends;
     public FriendAdapter adapter;
     private LocationService locationService;
+
+    private Friend user;
 
     private Intent locationIntent;
 
@@ -53,11 +57,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, FriendActivity.class);
-                startActivityForResult(i, 0);
+                startActivityForResult(i, REQUEST_ADD_FRIEND);
             }
         });
-
-
 
     }
 
@@ -109,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivityForResult(i, REQUEST_SETTINGS);
             return true;
         }
 
@@ -121,27 +125,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*public void openSettings(View view) {
+        Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(i);
+    }*/
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0){
-            if(resultCode == Activity.RESULT_OK){
-                Friend f = (Friend)data.getSerializableExtra("result");
-                //String friend = data.getStringExtra("result");
-                if(friends.contains(f.getName())){
-                    Snackbar.make(this.findViewById(android.R.id.content), "Friend already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        switch (requestCode) {
+            case REQUEST_ADD_FRIEND:
+                if(resultCode == Activity.RESULT_OK){
+                    Friend f = (Friend)data.getSerializableExtra("result");
+                    //String friend = data.getStringExtra("result");
+                    if(friends.contains(f.getName())){
+                        Snackbar.make(this.findViewById(android.R.id.content), "Friend already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        return;
+                    }
+
+                    friends.add(f);
+                    if(locationService != null) locationService.setUpdateListener(f);
+                    adapter.notifyDataSetChanged();
+                    Snackbar.make(this.findViewById(android.R.id.content), "Friend added successfully!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     return;
                 }
+                if(resultCode == Activity.RESULT_CANCELED){
 
-                friends.add(f);
-                if(locationService != null) locationService.setUpdateListener(f);
-                adapter.notifyDataSetChanged();
-                Snackbar.make(this.findViewById(android.R.id.content), "Friend added successfully!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                return;
-            }
-            if(resultCode == Activity.RESULT_CANCELED){
+                }
+                break;
+            case REQUEST_SETTINGS:
 
-            }
+                break;
         }
     }
 }
