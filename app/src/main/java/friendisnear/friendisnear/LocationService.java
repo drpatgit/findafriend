@@ -4,8 +4,6 @@ import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,11 +14,12 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.List;
 
-public class LocationService extends Service implements OnSharedPreferenceChangeListener {
+import friendisnear.friendisnear.utilities.CommonUtility;
+import friendisnear.friendisnear.utilities.Friend;
+
+public class LocationService extends Service {
 
     public static int TIME_MILLIS = 1000;
     public static int LOCATION_REFRESH_TIME = 1000*10;
@@ -35,15 +34,20 @@ public class LocationService extends Service implements OnSharedPreferenceChange
     private Context thisActivityContext;
 
     private CommonUtility commons;
-    private ArrayList<Friend> friends;
+    private List<Friend> friends;
+
+    private int sync_time;
 
     public LocationService() {
+        super();
         commons = CommonUtility.getInstance();
         friends = commons.getFriends();
+        commons.setLocationService(this);
     }
 
     public void initStartService() {
         thisActivityContext = getApplicationContext();
+        sync_time = commons.getSyncTime();
         if(ContextCompat.checkSelfPermission(thisActivityContext,Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(thisActivityContext,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -59,6 +63,8 @@ public class LocationService extends Service implements OnSharedPreferenceChange
 
     }
 
+    public void setSyncTime(int sync_time) { this.sync_time = sync_time; }
+
     private Runnable locationRequest = new Runnable() {
 
         @Override
@@ -69,7 +75,7 @@ public class LocationService extends Service implements OnSharedPreferenceChange
                     mLocationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, mLocationListener,null);
                 }
             }
-            handler.postDelayed(locationRequest, LOCATION_REFRESH_TIME);
+            handler.postDelayed(locationRequest, sync_time);
         }
     };
 
@@ -104,29 +110,16 @@ public class LocationService extends Service implements OnSharedPreferenceChange
         //throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key) {
-            case SettingsActivity.PREF_SYNC_FREQUENCY:
 
-                break;
-            case SettingsActivity.PREF_USER_NAME:
-
-                break;
-        }
-    }
 
     public class LocationBinder extends Binder {
         LocationService getService() {return LocationService.this;}
     }
 
     public void updateLocation() {
-        if(friends == null) return;
-        for(int i = 0; i < friends.size(); i++) friends.get(i).setLocation(mLastLocation);
+        commons.updateLocation(mLastLocation);
+        //if(friends == null) return;
+        //for(int i = 0; i < friends.size(); i++) friends.get(i).setLocation(mLastLocation);
     }
 
-    public void setUpdateListener(Friend friend) {
-        //friends.add(friend);
-        updateLocation();
-    }
 }

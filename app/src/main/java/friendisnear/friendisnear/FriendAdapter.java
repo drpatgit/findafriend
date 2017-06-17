@@ -9,13 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import friendisnear.friendisnear.utilities.CommonUtility;
+import friendisnear.friendisnear.utilities.Friend;
 
 /**
  * Created by stieblj on 15.06.2017.
  */
 
 public class FriendAdapter extends BaseAdapter {
-    private ArrayList<Friend> friends;
+    private List<Friend> friends;
     private LayoutInflater friendInf;
 
     public FriendAdapter(Context c){

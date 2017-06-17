@@ -4,8 +4,6 @@ package friendisnear.friendisnear;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -15,15 +13,12 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
-
-import java.util.List;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -36,9 +31,10 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatPreferenceActivity implements OnSharedPreferenceChangeListener {
+public class SettingsActivity extends AppCompatPreferenceActivity { //implements OnSharedPreferenceChangeListener {
 
-    public static final String PREF_SYNC_FREQUENCY = "sync_frequency";
+
+    public static final String SYNC_FREQUENCY = "sync_frequency";
     public static final String PREF_USER_NAME = "user_name";
 
     private MainActivity parent;
@@ -128,19 +124,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupActionBar();
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new DataSyncPreferenceFragment()).commit();
+        //setupActionBar();
 
-    }
-
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     @Override
@@ -163,15 +150,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
         return isXLargeTablet(this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-
-        //loadHeadersFromResource(R.xml.pref_headers, target);
-    }
 
     /**
      * This method stops fragment injection in malicious applications.
@@ -182,13 +160,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName);
     }
 
-    @Override
+    /*@Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         if(parent == null) parent = MainActivity.getMainActivity();
         if(listener == null && parent != null) listener = parent.getLocationService();
 
         if(listener != null) listener.onSharedPreferenceChanged(sharedPreferences, s);
-    }
+    } */
 
     /**
      * This fragment shows data and sync preferences only. It is used when the
@@ -206,7 +184,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference(PREF_SYNC_FREQUENCY));
+            bindPreferenceSummaryToValue(findPreference(SYNC_FREQUENCY));
         }
 
         @Override
@@ -220,10 +198,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
         }
     }
 
-    @Override
+   /* @Override
     protected void onResume() {
         super.onResume();
-        getSharedPreferences(PREF_SYNC_FREQUENCY, MODE_PRIVATE)
+        getSharedPreferences(SYNC_FREQUENCY, MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
 
     }
@@ -231,7 +209,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
     @Override
     protected void onPause() {
         super.onPause();
-        getSharedPreferences(PREF_SYNC_FREQUENCY, MODE_PRIVATE)
+        getSharedPreferences(SYNC_FREQUENCY, MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
+    */
 }

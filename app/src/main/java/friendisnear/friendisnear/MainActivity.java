@@ -1,14 +1,14 @@
 package friendisnear.friendisnear;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,37 +17,44 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import friendisnear.friendisnear.LocationService.LocationBinder;
+import friendisnear.friendisnear.utilities.CommonUtility;
+import friendisnear.friendisnear.utilities.Friend;
+import friendisnear.friendisnear.utilities.FriendsChangedListener;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import static friendisnear.friendisnear.SettingsActivity.PREF_USER_NAME;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FriendsChangedListener{
 
     final private int REQUEST_ADD_FRIEND = 0;
     final private int REQUEST_SETTINGS = 1;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    //private ArrayList<Friend> friends;
 
-    CommonUtility commons;
-    private ArrayList<Friend> friends;
     public FriendAdapter adapter;
+
     private LocationService locationService;
 
     private Friend user;
 
     private Intent locationIntent;
 
+    private CommonUtility commons;
     private static MainActivity mainActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        commons = CommonUtility.getInstance();
+        commons.addFriendsChangedListener(this);
+        commons.setSharedPreferences(PreferenceManager.getDefaultSharedPreferences(this));
+
+        String userName = getSharedPreferences(PREF_USER_NAME, MODE_PRIVATE).getString(PREF_USER_NAME, "");
         //friends = new ArrayList<>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,15 +63,15 @@ public class MainActivity extends AppCompatActivity {
         adapter = new FriendAdapter(this);
         listView.setAdapter(adapter);
 
-        commons = CommonUtility.getInstance();
-        friends = commons.getFriends();
+        //friends = commons.getFriends();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, FriendActivity.class);
-                startActivityForResult(i, REQUEST_ADD_FRIEND);
+                startActivity(i);
+                //startActivityForResult(i, REQUEST_ADD_FRIEND);
             }
         });
 
@@ -80,13 +87,19 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
         }
 
-
-
         if(locationIntent==null){
             locationIntent = new Intent(this, LocationService.class);
             bindService(locationIntent, locationConnection, Context.BIND_AUTO_CREATE);
             startService(locationIntent);
+
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(MainActivity.this).unregisterOnSharedPreferenceChangeListener(commons);
+        commons.removeFriendsChangedListener(this);
     }
 
     //connect to the service
@@ -120,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent i = new Intent(MainActivity.this, SettingsActivity.class);
@@ -146,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case REQUEST_ADD_FRIEND:
+            /*case REQUEST_ADD_FRIEND:
                 if(resultCode == Activity.RESULT_OK){
                     Friend f = (Friend)data.getSerializableExtra("result");
                     //String friend = data.getStringExtra("result");
@@ -165,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 break;
+               */
             case REQUEST_SETTINGS:
 
                 break;
@@ -176,5 +189,30 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getMainActivity() {
         if(mainActivity != null) return mainActivity;
         return null;
+    }
+
+    @Override
+    public void onFriendsChanged(Friend f, CommonUtility.FriendAction action) {
+        switch (action) {
+            case ADDED:
+                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " added successfully to friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                adapter.notifyDataSetChanged();
+                break;
+            case ADD_FAILED:
+                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                break;
+            case REMOVED:
+                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " removed successfully from friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                adapter.notifyDataSetChanged();
+                break;
+            case REMOVE_FAILED:
+                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                break;
+            case LOCATION_CHANGED:
+                adapter.notifyDataSetChanged();
+                break;
+            case STAT_CHANGED:
+                break;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package friendisnear.friendisnear;
+package friendisnear.friendisnear.utilities;
 
 import android.location.Location;
 import android.os.Parcelable;

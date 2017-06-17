@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.LinkedList;
+import friendisnear.friendisnear.utilities.CommonUtility;
+import friendisnear.friendisnear.utilities.Friend;
 
 /**
  * Created by Patrick on 09.06.2017.
@@ -29,7 +30,9 @@ public class FriendActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!editText10.getText().toString().equals("")){
                     Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result", new Friend(editText10.getText().toString()));
+                    Friend newFriend = new Friend(editText10.getText().toString());
+                    CommonUtility.getInstance().addFriend(newFriend);
+                    returnIntent.putExtra("result", newFriend);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
                 finish();
