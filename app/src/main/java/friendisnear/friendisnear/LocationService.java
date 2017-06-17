@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class LocationService extends Service {
+public class LocationService extends Service implements OnSharedPreferenceChangeListener {
 
     public static int LOCATION_REFRESH_TIME = 1000*10;
     public static int LOCATION_REFRESH_DISTANCE = 5;
@@ -99,6 +101,18 @@ public class LocationService extends Service {
         //throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        switch (key) {
+            case SettingsActivity.PREF_SYNC_FREQUENCY:
+
+                break;
+            case SettingsActivity.PREF_USER_NAME:
+
+                break;
+        }
+    }
+
     public class LocationBinder extends Binder {
         LocationService getService() {return LocationService.this;}
     }
@@ -109,7 +123,7 @@ public class LocationService extends Service {
     }
 
     public void setUpdateListener(Friend friend) {
-        friends.add(friend);
+        //friends.add(friend);
         updateLocation();
     }
 }

@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent locationIntent;
 
+    private static MainActivity mainActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +63,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mainActivity = this;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
         }
 
         if(locationIntent==null){
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     friends.add(f);
-                    if(locationService != null) locationService.setUpdateListener(f);
+                    if(locationService != null) locationService.updateLocation();
                     adapter.notifyDataSetChanged();
                     Snackbar.make(this.findViewById(android.R.id.content), "Friend added successfully!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     return;
@@ -157,5 +160,12 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
         }
+    }
+
+    public LocationService getLocationService() { return locationService; }
+
+    public static MainActivity getMainActivity() {
+        if(mainActivity != null) return mainActivity;
+        return null;
     }
 }
