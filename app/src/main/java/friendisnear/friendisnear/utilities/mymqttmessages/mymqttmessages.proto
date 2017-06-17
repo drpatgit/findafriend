@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package mymqttmessages;
 
-option java_package = "friendisnear.friendisnear.mymqttmessages";
+option java_package = "friendisnear.friendisnear.utilities.mymqttmessages";
 option java_outer_classname = "ProtobufMessages";
 
 

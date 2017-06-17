@@ -5,9 +5,9 @@ import android.location.Location;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import friendisnear.friendisnear.LocationService;
 import friendisnear.friendisnear.SettingsActivity;
 
 /**
@@ -16,65 +16,73 @@ import friendisnear.friendisnear.SettingsActivity;
 
 public class CommonUtility implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public enum FriendAction {
-        ADDED, ADD_FAILED, REMOVED, REMOVE_FAILED, STAT_CHANGED, LOCATION_CHANGED, USERNAME_CHANGED;
+    public enum CommonAction {
+        FRIEND_ADDED, FRIEND_ADD_FAILED, FRIEND_REMOVED, FRIEND_REMOVE_FAILED, FRIEND_STAT_CHANGED, FRIEND_LOCATION_CHANGED, USER_LOCATION_CHANGED, USERNAME_CHANGED, SYNC_TIME_CHANGED;
     }
 
     private static final CommonUtility ourInstance = new CommonUtility();
 
-    private ArrayList<FriendsChangedListener> friendsListeners;
-    private ArrayList<Friend> friends;
+    private ArrayList<CommonActionLitener> friendsListeners;
+    private HashMap<String,Friend> friends;
     private Friend user;
     private SharedPreferences preferences;
-    private LocationService locationService;
+    //private LocationService locationService;
 
     public static CommonUtility getInstance() {
         return ourInstance;
     }
 
     private CommonUtility() {
-        friends = new ArrayList<>();
+        friends = new HashMap<>();
         friendsListeners = new ArrayList<>();
     }
 
     public Friend getUser() { return user; }
 
     public void addFriend(Friend friend) {
-        FriendAction action = FriendAction.ADD_FAILED;
-        if(!friends.contains(friend)) {
-            friends.add(friend);
-            action = FriendAction.ADDED;
+        CommonAction action = CommonAction.FRIEND_ADD_FAILED;
+        if(!friends.containsKey(friend.getName())) {
+            friends.put(friend.getName(), friend);
+            action = CommonAction.FRIEND_ADDED;
         }
-        fireFriendsChanged(friend, action);
+        fireChangedEvent(friend, action);
     }
 
     public void removeFriend(Friend friend) {
-        FriendAction action = FriendAction.REMOVE_FAILED;
-        if(friends.contains(friend)) {
-            friends.remove(friend);
-            action = FriendAction.REMOVED;
+        CommonAction action = CommonAction.FRIEND_REMOVE_FAILED;
+        if(friends.containsKey(friend.getName())) {
+            friends.remove(friend.getName());
+            action = CommonAction.FRIEND_REMOVED;
         }
-        fireFriendsChanged(friend, action);
+        fireChangedEvent(friend, action);
     }
 
-    public List<Friend> getFriends() {return Collections.unmodifiableList(friends);}
+    public Map<String,Friend> getFriends() {return Collections.unmodifiableMap(friends);}
 
-    public void addFriendsChangedListener(FriendsChangedListener listener) {
+    public void addCommonActionListener(CommonActionLitener listener) {
         friendsListeners.add(listener);
     }
 
-    public void removeFriendsChangedListener(FriendsChangedListener listener) {
+    public void removeFriendsChangedListener(CommonActionLitener listener) {
         friendsListeners.remove(listener);
     }
 
-    public void fireFriendsChanged(final Friend friend, final FriendAction action) {
-        for(int i = 0; i < friendsListeners.size(); i++) friendsListeners.get(i).onFriendsChanged(friend, action);
+    private void fireChangedEvent(final Friend friend, final CommonAction action) {
+        for(int i = 0; i < friendsListeners.size(); i++) friendsListeners.get(i).onCommonAction(friend, action);
     }
 
-    public void updateLocation(Location location) {
+    public void updateUserLocation(Location location) {
         if(user != null) {
-            user.setLocation(location);
-            fireFriendsChanged(user, FriendAction.LOCATION_CHANGED);
+            if(location != null) user.setLocation(location);
+            fireChangedEvent(user, CommonAction.USER_LOCATION_CHANGED);
+        }
+    }
+
+    public void updateLocation(String friendName, Location location) {
+        Friend f = friends.get(friendName);
+        if(f!= null) {
+            f.setLocation(location);
+            fireChangedEvent(f, CommonAction.FRIEND_LOCATION_CHANGED);
         }
     }
 
@@ -93,21 +101,19 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
         return 0;
     }
 
-    public void setLocationService(LocationService locationService) { this.locationService = locationService; }
+    //public void setLocationService(LocationService locationService) { this.locationService = locationService; }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
             case SettingsActivity.SYNC_FREQUENCY:
-                if(locationService != null) {
-                    locationService.setSyncTime(getSyncTime());
-                }
+                fireChangedEvent(null, CommonAction.SYNC_TIME_CHANGED);
                 break;
             case SettingsActivity.PREF_USER_NAME:
                 Friend newUser = new Friend(sharedPreferences.getString(key, "null"));
                 if(user != null) newUser.setLocation(user.getLocation());
                 user = newUser;
-                fireFriendsChanged(user, FriendAction.USERNAME_CHANGED);
+                fireChangedEvent(user, CommonAction.USERNAME_CHANGED);
                 break;
         }
     }

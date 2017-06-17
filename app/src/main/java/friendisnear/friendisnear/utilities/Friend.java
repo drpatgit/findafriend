@@ -14,6 +14,7 @@ public class Friend implements Serializable {
     private String name;
     private Location location;
     private Location oldLocation;
+    private boolean avaliable;
 
     public Friend(String name) {
         this.name = name;
@@ -30,6 +31,11 @@ public class Friend implements Serializable {
         return -1;
     }
 
+    public float getDistanceTo(Friend f) {
+        if(f != null && f.getLocation() != null && location != null) return location.distanceTo(f.getLocation());
+        return -1;
+    }
+
     public float getDistanceToOld() {
         float result = getDistanceTo(oldLocation);
         oldLocation = this.location;
@@ -42,6 +48,10 @@ public class Friend implements Serializable {
     public String getName() {
         return name;
     }
+
+    public boolean getAvaliable() {return avaliable;}
+
+    public void setAvaliable(boolean avaliable) {this.avaliable = avaliable;}
 
     @Override
     public String toString() { return name + " " +  location.toString();}

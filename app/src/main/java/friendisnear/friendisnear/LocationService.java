@@ -14,12 +14,16 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 
-import java.util.List;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
+import java.util.Map;
 
 import friendisnear.friendisnear.utilities.CommonUtility;
 import friendisnear.friendisnear.utilities.Friend;
+import friendisnear.friendisnear.utilities.CommonActionLitener;
+import friendisnear.friendisnear.utilities.ProtoMessager;
 
-public class LocationService extends Service {
+public class LocationService extends Service implements CommonActionLitener {
 
     public static int TIME_MILLIS = 1000;
     public static int LOCATION_REFRESH_TIME = 1000*10;
@@ -34,15 +38,19 @@ public class LocationService extends Service {
     private Context thisActivityContext;
 
     private CommonUtility commons;
-    private List<Friend> friends;
+    private Map<String,Friend> friends;
 
     private int sync_time;
+
+    private ProtoMessager protomessager;
 
     public LocationService() {
         super();
         commons = CommonUtility.getInstance();
         friends = commons.getFriends();
-        commons.setLocationService(this);
+        //commons.setLocationService(this);
+        commons.addCommonActionListener(this);
+        protomessager = new ProtoMessager();
     }
 
     public void initStartService() {
@@ -110,14 +118,26 @@ public class LocationService extends Service {
         //throw new UnsupportedOperationException("Not yet implemented");
     }
 
-
+    @Override
+    public void onCommonAction(Friend f, CommonUtility.CommonAction action) {
+        switch(action) {
+            case SYNC_TIME_CHANGED:
+                sync_time = commons.getSyncTime();
+                break;
+        }
+    }
 
     public class LocationBinder extends Binder {
         LocationService getService() {return LocationService.this;}
     }
 
     public void updateLocation() {
-        commons.updateLocation(mLastLocation);
+        try {
+            protomessager.sendLocation(mLastLocation);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        commons.updateUserLocation(mLastLocation);
         //if(friends == null) return;
         //for(int i = 0; i < friends.size(); i++) friends.get(i).setLocation(mLastLocation);
     }

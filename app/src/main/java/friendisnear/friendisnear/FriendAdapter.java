@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import friendisnear.friendisnear.utilities.CommonUtility;
 import friendisnear.friendisnear.utilities.Friend;
@@ -19,20 +20,30 @@ import friendisnear.friendisnear.utilities.Friend;
  */
 
 public class FriendAdapter extends BaseAdapter {
-    private List<Friend> friends;
+
+    private Friend[] friends;
+    private Friend user;
+    private CommonUtility commons;
     private LayoutInflater friendInf;
 
     public FriendAdapter(Context c){
-        friends = CommonUtility.getInstance().getFriends();
+        //friends = CommonUtility.getInstance().getFriends();
+        commons = CommonUtility.getInstance();
+        updateFriends();
         friendInf=LayoutInflater.from(c);
     }
 
+
+    public void updateFriends() {
+        friends = new Friend[commons.getFriends().size()];
+        friends = commons.getFriends().values().toArray(friends);
+    }
 
     //public void addFriend(Friend newFriend) { friends.add(newFriend); }
 
     @Override
     public int getCount() {
-        return friends.size();
+        return friends.length;
     }
 
     @Override
@@ -55,12 +66,12 @@ public class FriendAdapter extends BaseAdapter {
         TextView friendLocation = (TextView)friendLay.findViewById(R.id.friend_location);
         TextView friendDistance = (TextView)friendLay.findViewById(R.id.friend_distance);
         //get song using position
-        Friend currFriend = friends.get(position);
+        Friend currFriend = friends[position];
         //get title and artist strings
         friendName.setText(currFriend.getName());
         if(currFriend.getLocation() != null) {
             friendLocation.setText(currFriend.getLocation().toString());
-            friendDistance.setText(String.valueOf(currFriend.getDistanceToOld()));
+            friendDistance.setText(String.valueOf(currFriend.getDistanceTo(user)));
         }
         else friendLocation.setText("");
         //set position as tag
@@ -69,4 +80,7 @@ public class FriendAdapter extends BaseAdapter {
     }
 
 
+    public void updateUser() {
+        this.user = commons.getUser();
+    }
 }
