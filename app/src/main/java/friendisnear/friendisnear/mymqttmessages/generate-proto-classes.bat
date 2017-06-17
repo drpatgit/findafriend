@@ -1,1 +1,1 @@
-protoc -I=. --java_out=../../../src/main/java/ mymqttmessages.proto
+protoc -I=. --java_out=../../../ mymqttmessages.proto

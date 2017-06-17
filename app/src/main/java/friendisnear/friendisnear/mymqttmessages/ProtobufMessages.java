@@ -1052,6 +1052,15 @@ public final class ProtobufMessages {
      * <code>required float speed = 4;</code>
      */
     float getSpeed();
+
+    /**
+     * <code>required bool avaliable = 5;</code>
+     */
+    boolean hasAvaliable();
+    /**
+     * <code>required bool avaliable = 5;</code>
+     */
+    boolean getAvaliable();
   }
   /**
    * Protobuf type {@code mymqttmessages.PBGenericLocation}
@@ -1069,6 +1078,7 @@ public final class ProtobufMessages {
       latidude_ = 0D;
       longitude_ = 0D;
       speed_ = 0F;
+      avaliable_ = false;
     }
 
     @java.lang.Override
@@ -1117,6 +1127,11 @@ public final class ProtobufMessages {
             case 37: {
               bitField0_ |= 0x00000008;
               speed_ = input.readFloat();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              avaliable_ = input.readBool();
               break;
             }
           }
@@ -1204,6 +1219,21 @@ public final class ProtobufMessages {
       return speed_;
     }
 
+    public static final int AVALIABLE_FIELD_NUMBER = 5;
+    private boolean avaliable_;
+    /**
+     * <code>required bool avaliable = 5;</code>
+     */
+    public boolean hasAvaliable() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bool avaliable = 5;</code>
+     */
+    public boolean getAvaliable() {
+      return avaliable_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1226,6 +1256,10 @@ public final class ProtobufMessages {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasAvaliable()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1243,6 +1277,9 @@ public final class ProtobufMessages {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeFloat(4, speed_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, avaliable_);
       }
       unknownFields.writeTo(output);
     }
@@ -1267,6 +1304,10 @@ public final class ProtobufMessages {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(4, speed_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, avaliable_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1311,6 +1352,11 @@ public final class ProtobufMessages {
             == java.lang.Float.floatToIntBits(
                 other.getSpeed()));
       }
+      result = result && (hasAvaliable() == other.hasAvaliable());
+      if (hasAvaliable()) {
+        result = result && (getAvaliable()
+            == other.getAvaliable());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1341,6 +1387,11 @@ public final class ProtobufMessages {
         hash = (37 * hash) + SPEED_FIELD_NUMBER;
         hash = (53 * hash) + java.lang.Float.floatToIntBits(
             getSpeed());
+      }
+      if (hasAvaliable()) {
+        hash = (37 * hash) + AVALIABLE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+            getAvaliable());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1468,6 +1519,8 @@ public final class ProtobufMessages {
         bitField0_ = (bitField0_ & ~0x00000004);
         speed_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000008);
+        avaliable_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -1508,6 +1561,10 @@ public final class ProtobufMessages {
           to_bitField0_ |= 0x00000008;
         }
         result.speed_ = speed_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.avaliable_ = avaliable_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1562,6 +1619,9 @@ public final class ProtobufMessages {
         if (other.hasSpeed()) {
           setSpeed(other.getSpeed());
         }
+        if (other.hasAvaliable()) {
+          setAvaliable(other.getAvaliable());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1578,6 +1638,9 @@ public final class ProtobufMessages {
           return false;
         }
         if (!hasSpeed()) {
+          return false;
+        }
+        if (!hasAvaliable()) {
           return false;
         }
         return true;
@@ -1726,6 +1789,38 @@ public final class ProtobufMessages {
       public Builder clearSpeed() {
         bitField0_ = (bitField0_ & ~0x00000008);
         speed_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private boolean avaliable_ ;
+      /**
+       * <code>required bool avaliable = 5;</code>
+       */
+      public boolean hasAvaliable() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required bool avaliable = 5;</code>
+       */
+      public boolean getAvaliable() {
+        return avaliable_;
+      }
+      /**
+       * <code>required bool avaliable = 5;</code>
+       */
+      public Builder setAvaliable(boolean value) {
+        bitField0_ |= 0x00000010;
+        avaliable_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool avaliable = 5;</code>
+       */
+      public Builder clearAvaliable() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        avaliable_ = false;
         onChanged();
         return this;
       }
@@ -2529,12 +2624,12 @@ public final class ProtobufMessages {
       "\001\n\tPBMessage\022\016\n\006source\030\001 \002(\r\0225\n\010location" +
       "\030e \001(\0132!.mymqttmessages.PBGenericLocatio" +
       "nH\000\022-\n\004text\030f \001(\0132\035.mymqttmessages.PBGen" +
-      "ericTextH\000B\t\n\007msgtype\"U\n\021PBGenericLocati" +
+      "ericTextH\000B\t\n\007msgtype\"h\n\021PBGenericLocati" +
       "on\022\014\n\004time\030\001 \002(\003\022\020\n\010latidude\030\002 \002(\001\022\021\n\tlo" +
-      "ngitude\030\003 \002(\001\022\r\n\005speed\030\004 \002(\002\"-\n\rPBGeneri" +
-      "cText\022\014\n\004text\030\001 \002(\t\022\016\n\006sender\030\002 \002(\tB<\n(f" +
-      "riendisnear.friendisnear.mymqttmessagesB" +
-      "\020ProtobufMessages"
+      "ngitude\030\003 \002(\001\022\r\n\005speed\030\004 \002(\002\022\021\n\tavaliabl" +
+      "e\030\005 \002(\010\"-\n\rPBGenericText\022\014\n\004text\030\001 \002(\t\022\016" +
+      "\n\006sender\030\002 \002(\tB<\n(friendisnear.friendisn" +
+      "ear.mymqttmessagesB\020ProtobufMessages"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2559,7 +2654,7 @@ public final class ProtobufMessages {
     internal_static_mymqttmessages_PBGenericLocation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_mymqttmessages_PBGenericLocation_descriptor,
-        new java.lang.String[] { "Time", "Latidude", "Longitude", "Speed", });
+        new java.lang.String[] { "Time", "Latidude", "Longitude", "Speed", "Avaliable", });
     internal_static_mymqttmessages_PBGenericText_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_mymqttmessages_PBGenericText_fieldAccessorTable = new

@@ -18,13 +18,13 @@ public class FriendAdapter extends BaseAdapter {
     private ArrayList<Friend> friends;
     private LayoutInflater friendInf;
 
-    public FriendAdapter(Context c, ArrayList<Friend> friends){
-        this.friends = friends;
+    public FriendAdapter(Context c){
+        friends = CommonUtility.getInstance().getFriends();
         friendInf=LayoutInflater.from(c);
     }
 
 
-    public void addFriend(Friend newFriend) { friends.add(newFriend); }
+    //public void addFriend(Friend newFriend) { friends.add(newFriend); }
 
     @Override
     public int getCount() {

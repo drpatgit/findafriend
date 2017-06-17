@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     final private int REQUEST_SETTINGS = 1;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
-    public ArrayList<Friend> friends;
+    CommonUtility commons;
+    private ArrayList<Friend> friends;
     public FriendAdapter adapter;
     private LocationService locationService;
 
@@ -46,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        friends = new ArrayList<>();
+        //friends = new ArrayList<>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        adapter = new FriendAdapter(this, friends);
+        adapter = new FriendAdapter(this);
         listView.setAdapter(adapter);
+
+        commons = CommonUtility.getInstance();
+        friends = commons.getFriends();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(i, REQUEST_ADD_FRIEND);
             }
         });
+
 
         mainActivity = this;
     }
@@ -73,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
         }
+
+
 
         if(locationIntent==null){
             locationIntent = new Intent(this, LocationService.class);
@@ -95,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            locationService = null;
         }
     };
 

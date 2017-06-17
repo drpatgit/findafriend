@@ -21,6 +21,7 @@ message PBGenericLocation {
 	required double latidude = 2;
 	required double longitude = 3;
 	required float speed = 4;
+	required bool avaliable = 5;
 }
 
 message PBGenericText {

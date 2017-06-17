@@ -22,6 +22,7 @@ import java.util.TimerTask;
 
 public class LocationService extends Service implements OnSharedPreferenceChangeListener {
 
+    public static int TIME_MILLIS = 1000;
     public static int LOCATION_REFRESH_TIME = 1000*10;
     public static int LOCATION_REFRESH_DISTANCE = 5;
 
@@ -33,10 +34,12 @@ public class LocationService extends Service implements OnSharedPreferenceChange
 
     private Context thisActivityContext;
 
+    private CommonUtility commons;
     private ArrayList<Friend> friends;
 
     public LocationService() {
-
+        commons = CommonUtility.getInstance();
+        friends = commons.getFriends();
     }
 
     public void initStartService() {
@@ -51,7 +54,7 @@ public class LocationService extends Service implements OnSharedPreferenceChange
             //mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
             //        LOCATION_REFRESH_DISTANCE, mLocationListener);
         }
-        friends = new ArrayList<>();
+        //friends = new ArrayList<>();
         mLastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
     }
