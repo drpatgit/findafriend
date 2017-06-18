@@ -30,6 +30,7 @@ public class FriendAdapter extends BaseAdapter {
         //friends = CommonUtility.getInstance().getFriends();
         commons = CommonUtility.getInstance();
         updateFriends();
+        updateUser();
         friendInf=LayoutInflater.from(c);
     }
 

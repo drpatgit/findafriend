@@ -89,13 +89,18 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
     public void setSharedPreferences(SharedPreferences preferences) {
         this.preferences = preferences;
         preferences.registerOnSharedPreferenceChangeListener(this);
-        String userName = preferences.getString(SettingsActivity.PREF_USER_NAME,"null");
-        if(userName != null) user = new Friend(userName);
+        String userName = preferences.getString(SettingsActivity.PREF_USER_NAME,"Mustermann");
+        if(userName != null) {
+            user = new Friend(userName);
+            fireChangedEvent(user, CommonAction.USERNAME_CHANGED);
+        }
     }
 
     public int getSyncTime() {
         if(preferences != null) {
-            return Integer.parseInt(preferences.getString(SettingsActivity.SYNC_FREQUENCY, "null")) * 1000;
+            String value = preferences.getString(SettingsActivity.SYNC_FREQUENCY, "60");
+
+            return Integer.parseInt(value) * 1000;
         }
 
         return 0;

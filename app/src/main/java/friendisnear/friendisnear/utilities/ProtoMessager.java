@@ -50,8 +50,9 @@ public class ProtoMessager implements CommonActionLitener {
 		this.clientId = clientId;
 
 		commons = CommonUtility.getInstance();
+        commons.addCommonActionListener(this);
 		user = commons.getUser();
-		sendTopic = user.getName();
+		if(user != null) sendTopic = user.getName();
 
 		setup();
 	}
@@ -62,14 +63,14 @@ public class ProtoMessager implements CommonActionLitener {
 		try {
 			sampleClient = new MqttAsyncClient(this.broker, this.clientId, persistence);
 			MqttConnectOptions connOpts = new MqttConnectOptions();
-			connOpts.setCleanSession(true);
+			connOpts.setCleanSession(false);
 			//LOG.info("Connecting to broker: " + broker);
 
 			sampleClient.setCallback(new MqttCallback() {
 
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
 					//LOG.info("message arrived Topic: {} ", topic);
-					if(!topic.equalsIgnoreCase(user.getName())) processProtobufMessage(topic, message.getPayload());
+					processProtobufMessage(topic, message.getPayload());
 				}
 
 				public void deliveryComplete(IMqttDeliveryToken token) {
@@ -145,7 +146,7 @@ public class ProtoMessager implements CommonActionLitener {
 	}
 
 	public void sendLocation(Location location) throws MqttException {
-		if (connected) {
+		if (connected && sendTopic != null && location != null) {
 			//LOG.debug("Publishing message: {}", number);
 			MqttMessage message = genericLocationMessage(location);
 			message.setQos(qos);
@@ -163,6 +164,7 @@ public class ProtoMessager implements CommonActionLitener {
 		ProtobufMessages.PBGenericLocation.Builder locationMessage = ProtobufMessages.PBGenericLocation.newBuilder();
 		locationMessage.setTime(location.getTime());
 		locationMessage.setLatidude(location.getLatitude());
+        locationMessage.setLongitude(location.getLongitude());
 		locationMessage.setSpeed(location.getSpeed());
 		locationMessage.setAvaliable(true);
 		builder.setLocation(locationMessage);
@@ -230,6 +232,7 @@ public class ProtoMessager implements CommonActionLitener {
                 break;
             case USERNAME_CHANGED:
                 try {
+                    sendTopic = commons.getUser().getName();
                     sendLocation(f.getLocation());
                 } catch (MqttException e) {
                     e.printStackTrace();

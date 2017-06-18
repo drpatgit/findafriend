@@ -128,7 +128,8 @@ public class LocationService extends Service implements CommonActionLitener {
     }
 
     public class LocationBinder extends Binder {
-        LocationService getService() {return LocationService.this;}
+        LocationService getService() {
+            return LocationService.this;}
     }
 
     public void updateLocation() {

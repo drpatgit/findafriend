@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
         setContentView(R.layout.activity_main);
 
         commons = CommonUtility.getInstance();
-        commons.addCommonActionListener(this);
+
         commons.setSharedPreferences(PreferenceManager.getDefaultSharedPreferences(this));
 
         String userName = getSharedPreferences(PREF_USER_NAME, MODE_PRIVATE).getString(PREF_USER_NAME, "");
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
             }
         });
 
-
+        commons.addCommonActionListener(this);
         mainActivity = this;
     }
 
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
         super.onDestroy();
         PreferenceManager.getDefaultSharedPreferences(MainActivity.this).unregisterOnSharedPreferenceChangeListener(commons);
         commons.removeFriendsChangedListener(this);
+        unbindService(locationConnection);
     }
 
     //connect to the service
@@ -174,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
 
     @Override
     public void onCommonAction(Friend f, CommonUtility.CommonAction action) {
+        if(adapter == null) return;
         switch (action) {
             case FRIEND_ADDED:
                 Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " added successfully to friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
