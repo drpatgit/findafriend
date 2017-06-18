@@ -78,7 +78,8 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
         }
     }
 
-    public void updateLocation(String friendName, Location location) {
+    public void updateLocation(String topic, Location location) {
+        String friendName = topic.substring(ProtoMessager.TOPIC_PREFIX.length());
         Friend f = friends.get(friendName);
         if(f!= null) {
             f.setLocation(location);

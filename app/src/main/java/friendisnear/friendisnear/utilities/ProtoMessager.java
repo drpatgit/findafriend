@@ -39,6 +39,8 @@ public class ProtoMessager implements CommonActionLitener {
 
     private MqttCallback callback;
 
+	public final static String TOPIC_PREFIX = "friendisnear/";
+
 	public ProtoMessager() {
 		this("tcp://iot.soft.uni-linz.ac.at:1883", MqttAsyncClient.generateClientId());
 	}
@@ -55,7 +57,7 @@ public class ProtoMessager implements CommonActionLitener {
 		commons = CommonUtility.getInstance();
         commons.addCommonActionListener(this);
 		user = commons.getUser();
-		if(user != null) sendTopic = user.getName();
+		if(user != null && user.getName() != null) sendTopic = TOPIC_PREFIX + user.getName();
 
 		setup();
 	}
@@ -66,14 +68,14 @@ public class ProtoMessager implements CommonActionLitener {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 //LOG.info("message arrived Topic: {} ", topic);
-				System.out.println("Message arrived " + topic + message.toString());
+				System.out.println("Message arrived from " + topic);
                 processProtobufMessage(topic, message.getPayload());
             }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
                 //LOG.trace("deliveryComplete with token {}", token);
-				System.out.println("DeliveryComplete with token " + token.toString());
+				System.out.println("DeliveryComplete with token " + token.getTopics());
             }
 
             @Override
@@ -98,7 +100,7 @@ public class ProtoMessager implements CommonActionLitener {
 						//LOG.info("connected to {}", ProtoMessager.this.broker);
 						if(commons == null) return;
 						for (String topic : commons.getFriends().keySet()) {
-								sampleClient.subscribe(topic, qos);
+								sampleClient.subscribe(TOPIC_PREFIX + topic, qos);
 						}
 
 						//sampleClient.subscribe(user.getName(), qos);
@@ -132,6 +134,8 @@ public class ProtoMessager implements CommonActionLitener {
 					location.setLongitude(l.getLongitude());
 					location.setSpeed(l.getSpeed());
 					location.setTime(l.getTime());
+
+					System.out.println("Location Processes: " + location.toString());
 
 					commons.updateLocation(topic, location);
 					//LOG.info("got number {} : payload size: {}", number.getNumber(), data.length);
@@ -228,21 +232,21 @@ public class ProtoMessager implements CommonActionLitener {
 		switch (action) {
             case FRIEND_ADDED:
                 try {
-                    sampleClient.subscribe(f.getName(), qos);
+                    sampleClient.subscribe(TOPIC_PREFIX + f.getName(), qos);
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
                 break;
             case FRIEND_REMOVED:
                 try {
-                    sampleClient.unsubscribe(f.getName());
+                    sampleClient.unsubscribe(TOPIC_PREFIX + f.getName());
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
                 break;
             case USERNAME_CHANGED:
                 try {
-                    sendTopic = commons.getUser().getName();
+                    sendTopic = TOPIC_PREFIX + commons.getUser().getName();
                     sendLocation(f.getLocation());
                 } catch (MqttException e) {
                     e.printStackTrace();

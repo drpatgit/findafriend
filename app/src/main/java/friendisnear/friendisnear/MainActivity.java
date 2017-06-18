@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
     private Intent locationIntent;
 
     private CommonUtility commons;
-    private static MainActivity mainActivity;
 
 
     @Override
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
         });
 
         commons.addCommonActionListener(this);
-        mainActivity = this;
     }
 
     @Override
@@ -168,11 +166,6 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
 
     public LocationService getLocationService() { return locationService; }
 
-    public static MainActivity getMainActivity() {
-        if(mainActivity != null) return mainActivity;
-        return null;
-    }
-
     @Override
     public void onCommonAction(final Friend f, final CommonUtility.CommonAction action) {
         if(adapter == null) return;
@@ -212,4 +205,5 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
         });
 
     }
+
 }
