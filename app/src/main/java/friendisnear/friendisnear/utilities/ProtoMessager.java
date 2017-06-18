@@ -36,6 +36,9 @@ public class ProtoMessager implements CommonActionLitener {
 	private CommonUtility commons;
 	private Friend user;
 
+
+    private MqttCallback callback;
+
 	public ProtoMessager() {
 		this("tcp://iot.soft.uni-linz.ac.at:1883", MqttAsyncClient.generateClientId());
 	}
@@ -58,7 +61,24 @@ public class ProtoMessager implements CommonActionLitener {
 	}
 
 	private void setup() {
-		
+
+        callback = new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                //LOG.info("message arrived Topic: {} ", topic);
+                processProtobufMessage(topic, message.getPayload());
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                //LOG.trace("deliveryComplete with token {}", token);
+            }
+
+            @Override
+            public void connectionLost(Throwable cause) {
+                //LOG.error("connection lost", cause);
+            }
+        };
 		MemoryPersistence persistence = new MemoryPersistence();
 		try {
 			sampleClient = new MqttAsyncClient(this.broker, this.clientId, persistence);
@@ -66,21 +86,7 @@ public class ProtoMessager implements CommonActionLitener {
 			connOpts.setCleanSession(false);
 			//LOG.info("Connecting to broker: " + broker);
 
-			sampleClient.setCallback(new MqttCallback() {
-
-				public void messageArrived(String topic, MqttMessage message) throws Exception {
-					//LOG.info("message arrived Topic: {} ", topic);
-					processProtobufMessage(topic, message.getPayload());
-				}
-
-				public void deliveryComplete(IMqttDeliveryToken token) {
-					//LOG.trace("deliveryComplete with token {}", token);
-				}
-
-				public void connectionLost(Throwable cause) {
-					//LOG.error("connection lost", cause);
-				}
-			});
+			sampleClient.setCallback(callback);
 
 			sampleClient.connect(connOpts, null, new IMqttActionListener() {
 
