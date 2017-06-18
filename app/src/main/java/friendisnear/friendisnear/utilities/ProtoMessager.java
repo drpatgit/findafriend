@@ -66,17 +66,20 @@ public class ProtoMessager implements CommonActionLitener {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 //LOG.info("message arrived Topic: {} ", topic);
+				System.out.println("Message arrived " + topic + message.toString());
                 processProtobufMessage(topic, message.getPayload());
             }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
                 //LOG.trace("deliveryComplete with token {}", token);
+				System.out.println("DeliveryComplete with token " + token.toString());
             }
 
             @Override
             public void connectionLost(Throwable cause) {
                 //LOG.error("connection lost", cause);
+				System.out.println("Connection lost " + cause.toString());
             }
         };
 		MemoryPersistence persistence = new MemoryPersistence();
@@ -157,6 +160,7 @@ public class ProtoMessager implements CommonActionLitener {
 			MqttMessage message = genericLocationMessage(location);
 			message.setQos(qos);
 			sampleClient.publish(sendTopic, message);
+			System.out.println("Publishing message: " + message.toString());
 		} else {
 			//LOG.error("connect first before sending");
 		}

@@ -143,4 +143,9 @@ public class LocationService extends Service implements CommonActionLitener {
         //for(int i = 0; i < friends.size(); i++) friends.get(i).setLocation(mLastLocation);
     }
 
+    @Override
+    public void onDestroy() {
+        protomessager.close();
+    }
+
 }

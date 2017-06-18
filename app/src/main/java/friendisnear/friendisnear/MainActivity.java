@@ -174,34 +174,42 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
     }
 
     @Override
-    public void onCommonAction(Friend f, CommonUtility.CommonAction action) {
+    public void onCommonAction(final Friend f, final CommonUtility.CommonAction action) {
         if(adapter == null) return;
-        switch (action) {
-            case FRIEND_ADDED:
-                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " added successfully to friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                adapter.updateFriends();
-                adapter.notifyDataSetChanged();
-                break;
-            case FRIEND_ADD_FAILED:
-                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                break;
-            case FRIEND_REMOVED:
-                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " removed successfully from friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                adapter.updateFriends();
-                adapter.notifyDataSetChanged();
-                break;
-            case FRIEND_REMOVE_FAILED:
-                Snackbar.make(this.findViewById(android.R.id.content), f.getName() + " already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                break;
-            case FRIEND_LOCATION_CHANGED:
-            case USER_LOCATION_CHANGED:
-                adapter.notifyDataSetChanged();
-                break;
-            case FRIEND_STAT_CHANGED:
-                break;
-            case USERNAME_CHANGED:
-                adapter.updateUser();
-                break;
-        }
+        final View view = this.findViewById(android.R.id.content);
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                switch (action) {
+                    case FRIEND_ADDED:
+                        Snackbar.make(view, f.getName() + " added successfully to friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        adapter.updateFriends();
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case FRIEND_ADD_FAILED:
+                        Snackbar.make(view, f.getName() + " already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        break;
+                    case FRIEND_REMOVED:
+                        Snackbar.make(view, f.getName() + " removed successfully from friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        adapter.updateFriends();
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case FRIEND_REMOVE_FAILED:
+                        Snackbar.make(view, f.getName() + " already in your friendlist!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        break;
+                    case FRIEND_LOCATION_CHANGED:
+                    case USER_LOCATION_CHANGED:
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case FRIEND_STAT_CHANGED:
+                        break;
+                    case USERNAME_CHANGED:
+                        adapter.updateUser();
+                        break;
+                }
+            }
+        });
+
     }
 }
