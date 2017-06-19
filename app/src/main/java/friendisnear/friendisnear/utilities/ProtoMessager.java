@@ -19,16 +19,22 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages;
-import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation;
-import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText;
+import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation;
+import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest;
+import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText;
 
 public class ProtoMessager implements CommonActionLitener {
 	//private final static Logger LOG = LoggerFactory.getLogger(ProtoMessager.class);
+	public final static int REQUEST_FRIEND = 1;
+	public final static int REQUEST_APPOINTMENT = 2;
+	public final static int REQUEST_ACCEPT = 3;
+	public final static int REQUEST_DECLINE = 4;
+
 
 	private final int qos = 0;
 	
 	private boolean connected;
-	private String sendTopic;
+	//private String sendTopic;
 	private MqttAsyncClient sampleClient;
 	private String broker;
 	private String clientId;
@@ -38,8 +44,6 @@ public class ProtoMessager implements CommonActionLitener {
 
 
     private MqttCallback callback;
-
-	public final static String TOPIC_PREFIX = "friendisnear/";
 
 	public ProtoMessager() {
 		this("tcp://iot.soft.uni-linz.ac.at:1883", MqttAsyncClient.generateClientId());
@@ -57,7 +61,7 @@ public class ProtoMessager implements CommonActionLitener {
 		commons = CommonUtility.getInstance();
         commons.addCommonActionListener(this);
 		user = commons.getUser();
-		if(user != null && user.getName() != null) sendTopic = TOPIC_PREFIX + user.getName();
+		//if(user != null && user.getName() != null) sendTopic = TOPIC_PREFIX + user.getName();
 
 		setup();
 	}
@@ -99,9 +103,12 @@ public class ProtoMessager implements CommonActionLitener {
 					try {
 						//LOG.info("connected to {}", ProtoMessager.this.broker);
 						if(commons == null) return;
-						for (String topic : commons.getFriends().keySet()) {
-								sampleClient.subscribe(TOPIC_PREFIX + topic, qos);
+						for (Friend fTopic : commons.getFriends().values()) {
+								sampleClient.subscribe(fTopic.getTopic(), qos);
 						}
+
+						// eigener Channel für Requests und Messages
+						sampleClient.subscribe(user.getTopicRequest(), qos);
 
 						//sampleClient.subscribe(user.getName(), qos);
 					} catch (MqttException e) {
@@ -129,22 +136,37 @@ public class ProtoMessager implements CommonActionLitener {
 			switch (pbm.getMsgtypeCase()) {
 				case LOCATION:
 					Location location = new Location("");
-					PBGenericLocation l = pbm.getLocation();
+					PBLocation l = pbm.getLocation();
 					location.setLatitude(l.getLatidude());
 					location.setLongitude(l.getLongitude());
 					location.setSpeed(l.getSpeed());
-					location.setTime(l.getTime());
+					location.setTime(l.getTimestamp());
 
 					System.out.println("Location Processes: " + location.toString());
 
 					commons.updateLocation(topic, location);
 					//LOG.info("got number {} : payload size: {}", number.getNumber(), data.length);
 					break;
-			case TEXT:
-					PBGenericText text = pbm.getText();
+				case REQUEST:
+					if(!topic.equals(user.getTopicRequest())) {
+						System.out.println("Requests are only allowed on request topics");
+						return;
+					}
+					PBRequest r = pbm.getRequest();
+					System.out.println("Request " + r.getRequest() + " from " + r.getSender() + " received.");
+					commons.requestReceived(r.getTimestamp(), r.getSender(), r.getRequest());
+					break;
+				case TEXT:
+					if(!topic.equals(user.getTopicRequest())) {
+						System.out.println("Messages are only allowed on request topics");
+						return;
+					}
+					PBText text = pbm.getText();
+					System.out.println("Message from " + text.getSender() + ": " + text.getText());
+					commons.messageReceived(text.getTimestamp(), text.getSender(), text.getText());
 					//LOG.info("got text {} : payload size: {}", text.getText(), data.length);
 					break;
-			default:
+				default:
 					//LOG.error("invalid msgtype {}  found", pbm.getMsgtypeCase().name());
 					break;
 			}
@@ -158,12 +180,11 @@ public class ProtoMessager implements CommonActionLitener {
 		//LOG.error("exception raised (2): error", me);
 	}
 
-	public void sendLocation(Location location) throws MqttException {
-		if (connected && sendTopic != null && location != null) {
+	public void sendLocation(Location location) throws MqttException {if (connected && user != null && location != null) {
 			//LOG.debug("Publishing message: {}", number);
 			MqttMessage message = genericLocationMessage(location);
 			message.setQos(qos);
-			sampleClient.publish(sendTopic, message);
+			sampleClient.publish(user.getTopic(), message);
 			System.out.println("Publishing message: " + message.toString());
 		} else {
 			//LOG.error("connect first before sending");
@@ -175,8 +196,8 @@ public class ProtoMessager implements CommonActionLitener {
 		ProtobufMessages.PBMessage.Builder builder = ProtobufMessages.PBMessage.newBuilder();
 		builder.setSource(clientId.hashCode());
 		// Concrete Message
-		ProtobufMessages.PBGenericLocation.Builder locationMessage = ProtobufMessages.PBGenericLocation.newBuilder();
-		locationMessage.setTime(location.getTime());
+		ProtobufMessages.PBLocation.Builder locationMessage = ProtobufMessages.PBLocation.newBuilder();
+		locationMessage.setTimestamp(location.getTime());
 		locationMessage.setLatidude(location.getLatitude());
         locationMessage.setLongitude(location.getLongitude());
 		locationMessage.setSpeed(location.getSpeed());
@@ -186,12 +207,12 @@ public class ProtoMessager implements CommonActionLitener {
 		return message;
 	}
 	
-	public void sendText(String number) throws MqttException {
+	public void sendText(String number, Friend target) throws MqttException {
 		if (connected) {
 			//LOG.debug("Publishing message: {}", number);
 			MqttMessage message = genericTextMessage(number);
 			message.setQos(qos);
-			sampleClient.publish(sendTopic, message);
+			sampleClient.publish(target.getTopicRequest(), message);
 		} else {
 			//LOG.error("connect first before sending");
 		}
@@ -202,7 +223,7 @@ public class ProtoMessager implements CommonActionLitener {
 		ProtobufMessages.PBMessage.Builder builder = ProtobufMessages.PBMessage.newBuilder();
 		builder.setSource(clientId.hashCode());
 		// Concrete Message
-		ProtobufMessages.PBGenericText.Builder textMessage = ProtobufMessages.PBGenericText.newBuilder();
+		ProtobufMessages.PBText.Builder textMessage = ProtobufMessages.PBText.newBuilder();
 		textMessage.setText(number);
 		builder.setText(textMessage);
 		MqttMessage message = new MqttMessage(builder.build().toByteArray());
@@ -232,21 +253,23 @@ public class ProtoMessager implements CommonActionLitener {
 		switch (action) {
             case FRIEND_ADDED:
                 try {
-                    sampleClient.subscribe(TOPIC_PREFIX + f.getName(), qos);
+                    sampleClient.subscribe(f.getTopic(), qos);
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
                 break;
             case FRIEND_REMOVED:
                 try {
-                    sampleClient.unsubscribe(TOPIC_PREFIX + f.getName());
+                    sampleClient.unsubscribe(f.getTopic());
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
                 break;
             case USERNAME_CHANGED:
                 try {
-                    sendTopic = TOPIC_PREFIX + commons.getUser().getName();
+					sampleClient.unsubscribe(user.getTopicRequest());
+					user = commons.getUser();
+					sampleClient.subscribe(user.getTopicRequest(), qos);
                     sendLocation(f.getLocation());
                 } catch (MqttException e) {
                     e.printStackTrace();

@@ -76,4 +76,6 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_default_alert_distance">500</string>
+    <string name="pref_title_alert_distance">Alert Distance</string>
 </resources>

@@ -28,30 +28,43 @@ public final class ProtobufMessages {
     int getSource();
 
     /**
-     * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+     * <code>optional .mymqttmessages.PBLocation location = 101;</code>
      */
     boolean hasLocation();
     /**
-     * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+     * <code>optional .mymqttmessages.PBLocation location = 101;</code>
      */
-    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation getLocation();
+    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation getLocation();
     /**
-     * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+     * <code>optional .mymqttmessages.PBLocation location = 101;</code>
      */
-    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder getLocationOrBuilder();
+    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder getLocationOrBuilder();
 
     /**
-     * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+     * <code>optional .mymqttmessages.PBRequest request = 102;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>optional .mymqttmessages.PBRequest request = 102;</code>
+     */
+    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest getRequest();
+    /**
+     * <code>optional .mymqttmessages.PBRequest request = 102;</code>
+     */
+    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder getRequestOrBuilder();
+
+    /**
+     * <code>optional .mymqttmessages.PBText text = 103;</code>
      */
     boolean hasText();
     /**
-     * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+     * <code>optional .mymqttmessages.PBText text = 103;</code>
      */
-    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText getText();
+    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText getText();
     /**
-     * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+     * <code>optional .mymqttmessages.PBText text = 103;</code>
      */
-    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder getTextOrBuilder();
+    friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder getTextOrBuilder();
 
     public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBMessage.MsgtypeCase getMsgtypeCase();
   }
@@ -104,31 +117,45 @@ public final class ProtobufMessages {
               break;
             }
             case 810: {
-              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder subBuilder = null;
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder subBuilder = null;
               if (msgtypeCase_ == 101) {
-                subBuilder = ((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_).toBuilder();
+                subBuilder = ((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_).toBuilder();
               }
               msgtype_ =
-                  input.readMessage(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.PARSER, extensionRegistry);
+                  input.readMessage(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_);
+                subBuilder.mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_);
                 msgtype_ = subBuilder.buildPartial();
               }
               msgtypeCase_ = 101;
               break;
             }
             case 818: {
-              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder subBuilder = null;
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder subBuilder = null;
               if (msgtypeCase_ == 102) {
-                subBuilder = ((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_).toBuilder();
+                subBuilder = ((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_).toBuilder();
               }
               msgtype_ =
-                  input.readMessage(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.PARSER, extensionRegistry);
+                  input.readMessage(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_);
+                subBuilder.mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_);
                 msgtype_ = subBuilder.buildPartial();
               }
               msgtypeCase_ = 102;
+              break;
+            }
+            case 826: {
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder subBuilder = null;
+              if (msgtypeCase_ == 103) {
+                subBuilder = ((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_).toBuilder();
+              }
+              msgtype_ =
+                  input.readMessage(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_);
+                msgtype_ = subBuilder.buildPartial();
+              }
+              msgtypeCase_ = 103;
               break;
             }
           }
@@ -161,7 +188,8 @@ public final class ProtobufMessages {
     public enum MsgtypeCase
         implements com.google.protobuf.Internal.EnumLite {
       LOCATION(101),
-      TEXT(102),
+      REQUEST(102),
+      TEXT(103),
       MSGTYPE_NOT_SET(0);
       private final int value;
       private MsgtypeCase(int value) {
@@ -178,7 +206,8 @@ public final class ProtobufMessages {
       public static MsgtypeCase forNumber(int value) {
         switch (value) {
           case 101: return LOCATION;
-          case 102: return TEXT;
+          case 102: return REQUEST;
+          case 103: return TEXT;
           case 0: return MSGTYPE_NOT_SET;
           default: return null;
         }
@@ -211,54 +240,80 @@ public final class ProtobufMessages {
 
     public static final int LOCATION_FIELD_NUMBER = 101;
     /**
-     * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+     * <code>optional .mymqttmessages.PBLocation location = 101;</code>
      */
     public boolean hasLocation() {
       return msgtypeCase_ == 101;
     }
     /**
-     * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+     * <code>optional .mymqttmessages.PBLocation location = 101;</code>
      */
-    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation getLocation() {
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation getLocation() {
       if (msgtypeCase_ == 101) {
-         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_;
+         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_;
       }
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
     }
     /**
-     * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+     * <code>optional .mymqttmessages.PBLocation location = 101;</code>
      */
-    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder getLocationOrBuilder() {
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder getLocationOrBuilder() {
       if (msgtypeCase_ == 101) {
-         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_;
+         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_;
       }
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
     }
 
-    public static final int TEXT_FIELD_NUMBER = 102;
+    public static final int REQUEST_FIELD_NUMBER = 102;
     /**
-     * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+     * <code>optional .mymqttmessages.PBRequest request = 102;</code>
      */
-    public boolean hasText() {
+    public boolean hasRequest() {
       return msgtypeCase_ == 102;
     }
     /**
-     * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+     * <code>optional .mymqttmessages.PBRequest request = 102;</code>
      */
-    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText getText() {
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest getRequest() {
       if (msgtypeCase_ == 102) {
-         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_;
+         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_;
       }
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
     }
     /**
-     * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+     * <code>optional .mymqttmessages.PBRequest request = 102;</code>
      */
-    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder getTextOrBuilder() {
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder getRequestOrBuilder() {
       if (msgtypeCase_ == 102) {
-         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_;
+         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_;
       }
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
+    }
+
+    public static final int TEXT_FIELD_NUMBER = 103;
+    /**
+     * <code>optional .mymqttmessages.PBText text = 103;</code>
+     */
+    public boolean hasText() {
+      return msgtypeCase_ == 103;
+    }
+    /**
+     * <code>optional .mymqttmessages.PBText text = 103;</code>
+     */
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText getText() {
+      if (msgtypeCase_ == 103) {
+         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_;
+      }
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
+    }
+    /**
+     * <code>optional .mymqttmessages.PBText text = 103;</code>
+     */
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder getTextOrBuilder() {
+      if (msgtypeCase_ == 103) {
+         return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_;
+      }
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -273,6 +328,12 @@ public final class ProtobufMessages {
       }
       if (hasLocation()) {
         if (!getLocation().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasRequest()) {
+        if (!getRequest().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -293,10 +354,13 @@ public final class ProtobufMessages {
         output.writeUInt32(1, source_);
       }
       if (msgtypeCase_ == 101) {
-        output.writeMessage(101, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_);
+        output.writeMessage(101, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_);
       }
       if (msgtypeCase_ == 102) {
-        output.writeMessage(102, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_);
+        output.writeMessage(102, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_);
+      }
+      if (msgtypeCase_ == 103) {
+        output.writeMessage(103, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_);
       }
       unknownFields.writeTo(output);
     }
@@ -312,11 +376,15 @@ public final class ProtobufMessages {
       }
       if (msgtypeCase_ == 101) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(101, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_);
+          .computeMessageSize(101, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_);
       }
       if (msgtypeCase_ == 102) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(102, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_);
+          .computeMessageSize(102, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_);
+      }
+      if (msgtypeCase_ == 103) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(103, (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -349,6 +417,10 @@ public final class ProtobufMessages {
               .equals(other.getLocation());
           break;
         case 102:
+          result = result && getRequest()
+              .equals(other.getRequest());
+          break;
+        case 103:
           result = result && getText()
               .equals(other.getText());
           break;
@@ -376,6 +448,10 @@ public final class ProtobufMessages {
           hash = (53 * hash) + getLocation().hashCode();
           break;
         case 102:
+          hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+          hash = (53 * hash) + getRequest().hashCode();
+          break;
+        case 103:
           hash = (37 * hash) + TEXT_FIELD_NUMBER;
           hash = (53 * hash) + getText().hashCode();
           break;
@@ -540,6 +616,13 @@ public final class ProtobufMessages {
           }
         }
         if (msgtypeCase_ == 102) {
+          if (requestBuilder_ == null) {
+            result.msgtype_ = msgtype_;
+          } else {
+            result.msgtype_ = requestBuilder_.build();
+          }
+        }
+        if (msgtypeCase_ == 103) {
           if (textBuilder_ == null) {
             result.msgtype_ = msgtype_;
           } else {
@@ -597,6 +680,10 @@ public final class ProtobufMessages {
             mergeLocation(other.getLocation());
             break;
           }
+          case REQUEST: {
+            mergeRequest(other.getRequest());
+            break;
+          }
           case TEXT: {
             mergeText(other.getText());
             break;
@@ -616,6 +703,11 @@ public final class ProtobufMessages {
         }
         if (hasLocation()) {
           if (!getLocation().isInitialized()) {
+            return false;
+          }
+        }
+        if (hasRequest()) {
+          if (!getRequest().isInitialized()) {
             return false;
           }
         }
@@ -694,33 +786,33 @@ public final class ProtobufMessages {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder> locationBuilder_;
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder> locationBuilder_;
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
       public boolean hasLocation() {
         return msgtypeCase_ == 101;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation getLocation() {
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation getLocation() {
         if (locationBuilder_ == null) {
           if (msgtypeCase_ == 101) {
-            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_;
+            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_;
           }
-          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
         } else {
           if (msgtypeCase_ == 101) {
             return locationBuilder_.getMessage();
           }
-          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
-      public Builder setLocation(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation value) {
+      public Builder setLocation(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation value) {
         if (locationBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -734,10 +826,10 @@ public final class ProtobufMessages {
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
       public Builder setLocation(
-          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder builderForValue) {
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder builderForValue) {
         if (locationBuilder_ == null) {
           msgtype_ = builderForValue.build();
           onChanged();
@@ -748,13 +840,13 @@ public final class ProtobufMessages {
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
-      public Builder mergeLocation(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation value) {
+      public Builder mergeLocation(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation value) {
         if (locationBuilder_ == null) {
           if (msgtypeCase_ == 101 &&
-              msgtype_ != friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance()) {
-            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.newBuilder((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_)
+              msgtype_ != friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance()) {
+            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.newBuilder((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_)
                 .mergeFrom(value).buildPartial();
           } else {
             msgtype_ = value;
@@ -770,7 +862,7 @@ public final class ProtobufMessages {
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
       public Builder clearLocation() {
         if (locationBuilder_ == null) {
@@ -789,37 +881,37 @@ public final class ProtobufMessages {
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder getLocationBuilder() {
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder getLocationBuilder() {
         return getLocationFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder getLocationOrBuilder() {
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder getLocationOrBuilder() {
         if ((msgtypeCase_ == 101) && (locationBuilder_ != null)) {
           return locationBuilder_.getMessageOrBuilder();
         } else {
           if (msgtypeCase_ == 101) {
-            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_;
+            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_;
           }
-          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericLocation location = 101;</code>
+       * <code>optional .mymqttmessages.PBLocation location = 101;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder>
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder> 
           getLocationFieldBuilder() {
         if (locationBuilder_ == null) {
           if (!(msgtypeCase_ == 101)) {
-            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
           }
           locationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder>(
-                  (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) msgtype_,
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder>(
+                  (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) msgtype_,
                   getParentForChildren(),
                   isClean());
           msgtype_ = null;
@@ -830,67 +922,67 @@ public final class ProtobufMessages {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder> textBuilder_;
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder> requestBuilder_;
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public boolean hasText() {
+      public boolean hasRequest() {
         return msgtypeCase_ == 102;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText getText() {
-        if (textBuilder_ == null) {
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest getRequest() {
+        if (requestBuilder_ == null) {
           if (msgtypeCase_ == 102) {
-            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_;
+            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_;
           }
-          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
         } else {
           if (msgtypeCase_ == 102) {
-            return textBuilder_.getMessage();
+            return requestBuilder_.getMessage();
           }
-          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public Builder setText(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText value) {
-        if (textBuilder_ == null) {
+      public Builder setRequest(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest value) {
+        if (requestBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           msgtype_ = value;
           onChanged();
         } else {
-          textBuilder_.setMessage(value);
+          requestBuilder_.setMessage(value);
         }
         msgtypeCase_ = 102;
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public Builder setText(
-          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder builderForValue) {
-        if (textBuilder_ == null) {
+      public Builder setRequest(
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder builderForValue) {
+        if (requestBuilder_ == null) {
           msgtype_ = builderForValue.build();
           onChanged();
         } else {
-          textBuilder_.setMessage(builderForValue.build());
+          requestBuilder_.setMessage(builderForValue.build());
         }
         msgtypeCase_ = 102;
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public Builder mergeText(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText value) {
-        if (textBuilder_ == null) {
+      public Builder mergeRequest(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest value) {
+        if (requestBuilder_ == null) {
           if (msgtypeCase_ == 102 &&
-              msgtype_ != friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance()) {
-            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.newBuilder((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_)
+              msgtype_ != friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance()) {
+            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.newBuilder((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_)
                 .mergeFrom(value).buildPartial();
           } else {
             msgtype_ = value;
@@ -898,18 +990,18 @@ public final class ProtobufMessages {
           onChanged();
         } else {
           if (msgtypeCase_ == 102) {
-            textBuilder_.mergeFrom(value);
+            requestBuilder_.mergeFrom(value);
           }
-          textBuilder_.setMessage(value);
+          requestBuilder_.setMessage(value);
         }
         msgtypeCase_ = 102;
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public Builder clearText() {
-        if (textBuilder_ == null) {
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
           if (msgtypeCase_ == 102) {
             msgtypeCase_ = 0;
             msgtype_ = null;
@@ -920,47 +1012,183 @@ public final class ProtobufMessages {
             msgtypeCase_ = 0;
             msgtype_ = null;
           }
-          textBuilder_.clear();
+          requestBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder getTextBuilder() {
-        return getTextFieldBuilder().getBuilder();
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder getRequestBuilder() {
+        return getRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder getTextOrBuilder() {
-        if ((msgtypeCase_ == 102) && (textBuilder_ != null)) {
-          return textBuilder_.getMessageOrBuilder();
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder getRequestOrBuilder() {
+        if ((msgtypeCase_ == 102) && (requestBuilder_ != null)) {
+          return requestBuilder_.getMessageOrBuilder();
         } else {
           if (msgtypeCase_ == 102) {
-            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_;
+            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_;
           }
-          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .mymqttmessages.PBGenericText text = 102;</code>
+       * <code>optional .mymqttmessages.PBRequest request = 102;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder>
-          getTextFieldBuilder() {
-        if (textBuilder_ == null) {
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
           if (!(msgtypeCase_ == 102)) {
-            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
           }
-          textBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder>(
-                  (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) msgtype_,
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder>(
+                  (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) msgtype_,
                   getParentForChildren(),
                   isClean());
           msgtype_ = null;
         }
         msgtypeCase_ = 102;
+        onChanged();;
+        return requestBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder> textBuilder_;
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public boolean hasText() {
+        return msgtypeCase_ == 103;
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText getText() {
+        if (textBuilder_ == null) {
+          if (msgtypeCase_ == 103) {
+            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_;
+          }
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
+        } else {
+          if (msgtypeCase_ == 103) {
+            return textBuilder_.getMessage();
+          }
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public Builder setText(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText value) {
+        if (textBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgtype_ = value;
+          onChanged();
+        } else {
+          textBuilder_.setMessage(value);
+        }
+        msgtypeCase_ = 103;
+        return this;
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public Builder setText(
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder builderForValue) {
+        if (textBuilder_ == null) {
+          msgtype_ = builderForValue.build();
+          onChanged();
+        } else {
+          textBuilder_.setMessage(builderForValue.build());
+        }
+        msgtypeCase_ = 103;
+        return this;
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public Builder mergeText(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText value) {
+        if (textBuilder_ == null) {
+          if (msgtypeCase_ == 103 &&
+              msgtype_ != friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance()) {
+            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.newBuilder((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgtype_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgtypeCase_ == 103) {
+            textBuilder_.mergeFrom(value);
+          }
+          textBuilder_.setMessage(value);
+        }
+        msgtypeCase_ = 103;
+        return this;
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public Builder clearText() {
+        if (textBuilder_ == null) {
+          if (msgtypeCase_ == 103) {
+            msgtypeCase_ = 0;
+            msgtype_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgtypeCase_ == 103) {
+            msgtypeCase_ = 0;
+            msgtype_ = null;
+          }
+          textBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder getTextBuilder() {
+        return getTextFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder getTextOrBuilder() {
+        if ((msgtypeCase_ == 103) && (textBuilder_ != null)) {
+          return textBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgtypeCase_ == 103) {
+            return (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_;
+          }
+          return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .mymqttmessages.PBText text = 103;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder> 
+          getTextFieldBuilder() {
+        if (textBuilder_ == null) {
+          if (!(msgtypeCase_ == 103)) {
+            msgtype_ = friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
+          }
+          textBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder>(
+                  (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) msgtype_,
+                  getParentForChildren(),
+                  isClean());
+          msgtype_ = null;
+        }
+        msgtypeCase_ = 103;
         onChanged();;
         return textBuilder_;
       }
@@ -1013,18 +1241,18 @@ public final class ProtobufMessages {
 
   }
 
-  public interface PBGenericLocationOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:mymqttmessages.PBGenericLocation)
+  public interface PBLocationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:mymqttmessages.PBLocation)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required int64 time = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    boolean hasTime();
+    boolean hasTimestamp();
     /**
-     * <code>required int64 time = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    long getTime();
+    long getTimestamp();
 
     /**
      * <code>required double latidude = 2;</code>
@@ -1063,18 +1291,18 @@ public final class ProtobufMessages {
     boolean getAvaliable();
   }
   /**
-   * Protobuf type {@code mymqttmessages.PBGenericLocation}
+   * Protobuf type {@code mymqttmessages.PBLocation}
    */
-  public  static final class PBGenericLocation extends
+  public  static final class PBLocation extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:mymqttmessages.PBGenericLocation)
-      PBGenericLocationOrBuilder {
-    // Use PBGenericLocation.newBuilder() to construct.
-    private PBGenericLocation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:mymqttmessages.PBLocation)
+      PBLocationOrBuilder {
+    // Use PBLocation.newBuilder() to construct.
+    private PBLocation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private PBGenericLocation() {
-      time_ = 0L;
+    private PBLocation() {
+      timestamp_ = 0L;
       latidude_ = 0D;
       longitude_ = 0D;
       speed_ = 0F;
@@ -1086,7 +1314,7 @@ public final class ProtobufMessages {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PBGenericLocation(
+    private PBLocation(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1111,7 +1339,7 @@ public final class ProtobufMessages {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              time_ = input.readInt64();
+              timestamp_ = input.readInt64();
               break;
             }
             case 17: {
@@ -1148,30 +1376,30 @@ public final class ProtobufMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericLocation_descriptor;
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBLocation_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericLocation_fieldAccessorTable
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBLocation_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder.class);
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder.class);
     }
 
     private int bitField0_;
-    public static final int TIME_FIELD_NUMBER = 1;
-    private long time_;
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private long timestamp_;
     /**
-     * <code>required int64 time = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    public boolean hasTime() {
+    public boolean hasTimestamp() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int64 time = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    public long getTime() {
-      return time_;
+    public long getTimestamp() {
+      return timestamp_;
     }
 
     public static final int LATIDUDE_FIELD_NUMBER = 2;
@@ -1240,7 +1468,7 @@ public final class ProtobufMessages {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasTime()) {
+      if (!hasTimestamp()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1267,7 +1495,7 @@ public final class ProtobufMessages {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, time_);
+        output.writeInt64(1, timestamp_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeDouble(2, latidude_);
@@ -1291,7 +1519,7 @@ public final class ProtobufMessages {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, time_);
+          .computeInt64Size(1, timestamp_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1320,16 +1548,16 @@ public final class ProtobufMessages {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation)) {
+      if (!(obj instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation)) {
         return super.equals(obj);
       }
-      friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation other = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) obj;
+      friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation other = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) obj;
 
       boolean result = true;
-      result = result && (hasTime() == other.hasTime());
-      if (hasTime()) {
-        result = result && (getTime()
-            == other.getTime());
+      result = result && (hasTimestamp() == other.hasTimestamp());
+      if (hasTimestamp()) {
+        result = result && (getTimestamp()
+            == other.getTimestamp());
       }
       result = result && (hasLatidude() == other.hasLatidude());
       if (hasLatidude()) {
@@ -1368,10 +1596,10 @@ public final class ProtobufMessages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasTime()) {
-        hash = (37 * hash) + TIME_FIELD_NUMBER;
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getTime());
+            getTimestamp());
       }
       if (hasLatidude()) {
         hash = (37 * hash) + LATIDUDE_FIELD_NUMBER;
@@ -1398,58 +1626,58 @@ public final class ProtobufMessages {
       return hash;
     }
 
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(byte[] data)
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(java.io.InputStream input)
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseDelimitedFrom(java.io.InputStream input)
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseDelimitedFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1461,7 +1689,7 @@ public final class ProtobufMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation prototype) {
+    public static Builder newBuilder(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1476,25 +1704,25 @@ public final class ProtobufMessages {
       return builder;
     }
     /**
-     * Protobuf type {@code mymqttmessages.PBGenericLocation}
+     * Protobuf type {@code mymqttmessages.PBLocation}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:mymqttmessages.PBGenericLocation)
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocationOrBuilder {
+        // @@protoc_insertion_point(builder_implements:mymqttmessages.PBLocation)
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericLocation_descriptor;
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBLocation_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericLocation_fieldAccessorTable
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBLocation_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.Builder.class);
+                friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.Builder.class);
       }
 
-      // Construct using friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.newBuilder()
+      // Construct using friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1511,7 +1739,7 @@ public final class ProtobufMessages {
       }
       public Builder clear() {
         super.clear();
-        time_ = 0L;
+        timestamp_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
         latidude_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1526,29 +1754,29 @@ public final class ProtobufMessages {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericLocation_descriptor;
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBLocation_descriptor;
       }
 
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation getDefaultInstanceForType() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance();
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation getDefaultInstanceForType() {
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance();
       }
 
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation build() {
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation result = buildPartial();
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation build() {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation buildPartial() {
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation result = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation(this);
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation buildPartial() {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation result = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.time_ = time_;
+        result.timestamp_ = timestamp_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1597,18 +1825,18 @@ public final class ProtobufMessages {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) {
-          return mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation)other);
+        if (other instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) {
+          return mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation other) {
-        if (other == friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation.getDefaultInstance()) return this;
-        if (other.hasTime()) {
-          setTime(other.getTime());
+      public Builder mergeFrom(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation other) {
+        if (other == friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation.getDefaultInstance()) return this;
+        if (other.hasTimestamp()) {
+          setTimestamp(other.getTimestamp());
         }
         if (other.hasLatidude()) {
           setLatidude(other.getLatidude());
@@ -1628,7 +1856,7 @@ public final class ProtobufMessages {
       }
 
       public final boolean isInitialized() {
-        if (!hasTime()) {
+        if (!hasTimestamp()) {
           return false;
         }
         if (!hasLatidude()) {
@@ -1650,11 +1878,11 @@ public final class ProtobufMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation parsedMessage = null;
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation) e.getUnfinishedMessage();
+          parsedMessage = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1665,34 +1893,34 @@ public final class ProtobufMessages {
       }
       private int bitField0_;
 
-      private long time_ ;
+      private long timestamp_ ;
       /**
-       * <code>required int64 time = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public boolean hasTime() {
+      public boolean hasTimestamp() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int64 time = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public long getTime() {
-        return time_;
+      public long getTimestamp() {
+        return timestamp_;
       }
       /**
-       * <code>required int64 time = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public Builder setTime(long value) {
+      public Builder setTimestamp(long value) {
         bitField0_ |= 0x00000001;
-        time_ = value;
+        timestamp_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int64 time = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public Builder clearTime() {
+      public Builder clearTimestamp() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        time_ = 0L;
+        timestamp_ = 0L;
         onChanged();
         return this;
       }
@@ -1835,61 +2063,56 @@ public final class ProtobufMessages {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:mymqttmessages.PBGenericLocation)
+      // @@protoc_insertion_point(builder_scope:mymqttmessages.PBLocation)
     }
 
-    // @@protoc_insertion_point(class_scope:mymqttmessages.PBGenericLocation)
-    private static final friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:mymqttmessages.PBLocation)
+    private static final friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation();
+      DEFAULT_INSTANCE = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation();
     }
 
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation getDefaultInstance() {
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PBGenericLocation>
-        PARSER = new com.google.protobuf.AbstractParser<PBGenericLocation>() {
-      public PBGenericLocation parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PBLocation>
+        PARSER = new com.google.protobuf.AbstractParser<PBLocation>() {
+      public PBLocation parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PBGenericLocation(input, extensionRegistry);
+          return new PBLocation(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<PBGenericLocation> parser() {
+    public static com.google.protobuf.Parser<PBLocation> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PBGenericLocation> getParserForType() {
+    public com.google.protobuf.Parser<PBLocation> getParserForType() {
       return PARSER;
     }
 
-    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericLocation getDefaultInstanceForType() {
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBLocation getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface PBGenericTextOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:mymqttmessages.PBGenericText)
+  public interface PBRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:mymqttmessages.PBRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string text = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    boolean hasText();
+    boolean hasTimestamp();
     /**
-     * <code>required string text = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    java.lang.String getText();
-    /**
-     * <code>required string text = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getTextBytes();
+    long getTimestamp();
 
     /**
      * <code>required string sender = 2;</code>
@@ -1904,21 +2127,31 @@ public final class ProtobufMessages {
      */
     com.google.protobuf.ByteString
         getSenderBytes();
+
+    /**
+     * <code>required int32 request = 3;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>required int32 request = 3;</code>
+     */
+    int getRequest();
   }
   /**
-   * Protobuf type {@code mymqttmessages.PBGenericText}
+   * Protobuf type {@code mymqttmessages.PBRequest}
    */
-  public  static final class PBGenericText extends
+  public  static final class PBRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:mymqttmessages.PBGenericText)
-      PBGenericTextOrBuilder {
-    // Use PBGenericText.newBuilder() to construct.
-    private PBGenericText(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:mymqttmessages.PBRequest)
+      PBRequestOrBuilder {
+    // Use PBRequest.newBuilder() to construct.
+    private PBRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private PBGenericText() {
-      text_ = "";
+    private PBRequest() {
+      timestamp_ = 0L;
       sender_ = "";
+      request_ = 0;
     }
 
     @java.lang.Override
@@ -1926,7 +2159,7 @@ public final class ProtobufMessages {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PBGenericText(
+    private PBRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1949,16 +2182,20 @@ public final class ProtobufMessages {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               bitField0_ |= 0x00000001;
-              text_ = bs;
+              timestamp_ = input.readInt64();
               break;
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
               sender_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              request_ = input.readInt32();
               break;
             }
           }
@@ -1975,57 +2212,30 @@ public final class ProtobufMessages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericText_descriptor;
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericText_fieldAccessorTable
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder.class);
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder.class);
     }
 
     private int bitField0_;
-    public static final int TEXT_FIELD_NUMBER = 1;
-    private volatile java.lang.Object text_;
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private long timestamp_;
     /**
-     * <code>required string text = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    public boolean hasText() {
+    public boolean hasTimestamp() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string text = 1;</code>
+     * <code>required int64 timestamp = 1;</code>
      */
-    public java.lang.String getText() {
-      java.lang.Object ref = text_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          text_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string text = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTextBytes() {
-      java.lang.Object ref = text_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        text_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public long getTimestamp() {
+      return timestamp_;
     }
 
     public static final int SENDER_FIELD_NUMBER = 2;
@@ -2070,17 +2280,36 @@ public final class ProtobufMessages {
       }
     }
 
+    public static final int REQUEST_FIELD_NUMBER = 3;
+    private int request_;
+    /**
+     * <code>required int32 request = 3;</code>
+     */
+    public boolean hasRequest() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 request = 3;</code>
+     */
+    public int getRequest() {
+      return request_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasText()) {
+      if (!hasTimestamp()) {
         memoizedIsInitialized = 0;
         return false;
       }
       if (!hasSender()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRequest()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2091,10 +2320,13 @@ public final class ProtobufMessages {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
+        output.writeInt64(1, timestamp_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sender_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, request_);
       }
       unknownFields.writeTo(output);
     }
@@ -2105,10 +2337,15 @@ public final class ProtobufMessages {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, timestamp_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sender_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, request_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2121,21 +2358,26 @@ public final class ProtobufMessages {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText)) {
+      if (!(obj instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest)) {
         return super.equals(obj);
       }
-      friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText other = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) obj;
+      friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest other = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) obj;
 
       boolean result = true;
-      result = result && (hasText() == other.hasText());
-      if (hasText()) {
-        result = result && getText()
-            .equals(other.getText());
+      result = result && (hasTimestamp() == other.hasTimestamp());
+      if (hasTimestamp()) {
+        result = result && (getTimestamp()
+            == other.getTimestamp());
       }
       result = result && (hasSender() == other.hasSender());
       if (hasSender()) {
         result = result && getSender()
             .equals(other.getSender());
+      }
+      result = result && (hasRequest() == other.hasRequest());
+      if (hasRequest()) {
+        result = result && (getRequest()
+            == other.getRequest());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -2148,71 +2390,76 @@ public final class ProtobufMessages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasText()) {
-        hash = (37 * hash) + TEXT_FIELD_NUMBER;
-        hash = (53 * hash) + getText().hashCode();
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getTimestamp());
       }
       if (hasSender()) {
         hash = (37 * hash) + SENDER_FIELD_NUMBER;
         hash = (53 * hash) + getSender().hashCode();
+      }
+      if (hasRequest()) {
+        hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRequest();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(byte[] data)
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(java.io.InputStream input)
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseDelimitedFrom(java.io.InputStream input)
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseDelimitedFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parseFrom(
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2224,7 +2471,7 @@ public final class ProtobufMessages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText prototype) {
+    public static Builder newBuilder(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -2239,25 +2486,25 @@ public final class ProtobufMessages {
       return builder;
     }
     /**
-     * Protobuf type {@code mymqttmessages.PBGenericText}
+     * Protobuf type {@code mymqttmessages.PBRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:mymqttmessages.PBGenericText)
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericTextOrBuilder {
+        // @@protoc_insertion_point(builder_implements:mymqttmessages.PBRequest)
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericText_descriptor;
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericText_fieldAccessorTable
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.Builder.class);
+                friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.Builder.class);
       }
 
-      // Construct using friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.newBuilder()
+      // Construct using friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2274,42 +2521,48 @@ public final class ProtobufMessages {
       }
       public Builder clear() {
         super.clear();
-        text_ = "";
+        timestamp_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
         sender_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        request_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBGenericText_descriptor;
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBRequest_descriptor;
       }
 
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText getDefaultInstanceForType() {
-        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance();
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest getDefaultInstanceForType() {
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance();
       }
 
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText build() {
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText result = buildPartial();
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest build() {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText buildPartial() {
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText result = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText(this);
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest buildPartial() {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest result = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.text_ = text_;
+        result.timestamp_ = timestamp_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
         result.sender_ = sender_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.request_ = request_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2342,25 +2595,26 @@ public final class ProtobufMessages {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) {
-          return mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText)other);
+        if (other instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) {
+          return mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText other) {
-        if (other == friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText.getDefaultInstance()) return this;
-        if (other.hasText()) {
-          bitField0_ |= 0x00000001;
-          text_ = other.text_;
-          onChanged();
+      public Builder mergeFrom(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest other) {
+        if (other == friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest.getDefaultInstance()) return this;
+        if (other.hasTimestamp()) {
+          setTimestamp(other.getTimestamp());
         }
         if (other.hasSender()) {
           bitField0_ |= 0x00000002;
           sender_ = other.sender_;
           onChanged();
+        }
+        if (other.hasRequest()) {
+          setRequest(other.getRequest());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2368,10 +2622,13 @@ public final class ProtobufMessages {
       }
 
       public final boolean isInitialized() {
-        if (!hasText()) {
+        if (!hasTimestamp()) {
           return false;
         }
         if (!hasSender()) {
+          return false;
+        }
+        if (!hasRequest()) {
           return false;
         }
         return true;
@@ -2381,11 +2638,11 @@ public final class ProtobufMessages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText parsedMessage = null;
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText) e.getUnfinishedMessage();
+          parsedMessage = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2396,78 +2653,34 @@ public final class ProtobufMessages {
       }
       private int bitField0_;
 
-      private java.lang.Object text_ = "";
+      private long timestamp_ ;
       /**
-       * <code>required string text = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public boolean hasText() {
+      public boolean hasTimestamp() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string text = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public java.lang.String getText() {
-        java.lang.Object ref = text_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            text_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getTimestamp() {
+        return timestamp_;
       }
       /**
-       * <code>required string text = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getTextBytes() {
-        java.lang.Object ref = text_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          text_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string text = 1;</code>
-       */
-      public Builder setText(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        text_ = value;
+      public Builder setTimestamp(long value) {
+        bitField0_ |= 0x00000001;
+        timestamp_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string text = 1;</code>
+       * <code>required int64 timestamp = 1;</code>
        */
-      public Builder clearText() {
+      public Builder clearTimestamp() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        text_ = getDefaultInstance().getText();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string text = 1;</code>
-       */
-      public Builder setTextBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        text_ = value;
+        timestamp_ = 0L;
         onChanged();
         return this;
       }
@@ -2547,6 +2760,38 @@ public final class ProtobufMessages {
         onChanged();
         return this;
       }
+
+      private int request_ ;
+      /**
+       * <code>required int32 request = 3;</code>
+       */
+      public boolean hasRequest() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 request = 3;</code>
+       */
+      public int getRequest() {
+        return request_;
+      }
+      /**
+       * <code>required int32 request = 3;</code>
+       */
+      public Builder setRequest(int value) {
+        bitField0_ |= 0x00000004;
+        request_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 request = 3;</code>
+       */
+      public Builder clearRequest() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        request_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -2558,39 +2803,857 @@ public final class ProtobufMessages {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:mymqttmessages.PBGenericText)
+      // @@protoc_insertion_point(builder_scope:mymqttmessages.PBRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:mymqttmessages.PBGenericText)
-    private static final friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:mymqttmessages.PBRequest)
+    private static final friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText();
+      DEFAULT_INSTANCE = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest();
     }
 
-    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText getDefaultInstance() {
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PBGenericText>
-        PARSER = new com.google.protobuf.AbstractParser<PBGenericText>() {
-      public PBGenericText parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PBRequest>
+        PARSER = new com.google.protobuf.AbstractParser<PBRequest>() {
+      public PBRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PBGenericText(input, extensionRegistry);
+          return new PBRequest(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<PBGenericText> parser() {
+    public static com.google.protobuf.Parser<PBRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PBGenericText> getParserForType() {
+    public com.google.protobuf.Parser<PBRequest> getParserForType() {
       return PARSER;
     }
 
-    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBGenericText getDefaultInstanceForType() {
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface PBTextOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:mymqttmessages.PBText)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required int64 timestamp = 1;</code>
+     */
+    boolean hasTimestamp();
+    /**
+     * <code>required int64 timestamp = 1;</code>
+     */
+    long getTimestamp();
+
+    /**
+     * <code>required string text = 2;</code>
+     */
+    boolean hasText();
+    /**
+     * <code>required string text = 2;</code>
+     */
+    java.lang.String getText();
+    /**
+     * <code>required string text = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTextBytes();
+
+    /**
+     * <code>required string sender = 3;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>required string sender = 3;</code>
+     */
+    java.lang.String getSender();
+    /**
+     * <code>required string sender = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getSenderBytes();
+  }
+  /**
+   * Protobuf type {@code mymqttmessages.PBText}
+   */
+  public  static final class PBText extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:mymqttmessages.PBText)
+      PBTextOrBuilder {
+    // Use PBText.newBuilder() to construct.
+    private PBText(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private PBText() {
+      timestamp_ = 0L;
+      text_ = "";
+      sender_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PBText(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              timestamp_ = input.readInt64();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              text_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              sender_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBText_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBText_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private long timestamp_;
+    /**
+     * <code>required int64 timestamp = 1;</code>
+     */
+    public boolean hasTimestamp() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 timestamp = 1;</code>
+     */
+    public long getTimestamp() {
+      return timestamp_;
+    }
+
+    public static final int TEXT_FIELD_NUMBER = 2;
+    private volatile java.lang.Object text_;
+    /**
+     * <code>required string text = 2;</code>
+     */
+    public boolean hasText() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string text = 2;</code>
+     */
+    public java.lang.String getText() {
+      java.lang.Object ref = text_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          text_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string text = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTextBytes() {
+      java.lang.Object ref = text_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        text_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SENDER_FIELD_NUMBER = 3;
+    private volatile java.lang.Object sender_;
+    /**
+     * <code>required string sender = 3;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string sender = 3;</code>
+     */
+    public java.lang.String getSender() {
+      java.lang.Object ref = sender_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sender_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string sender = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSenderBytes() {
+      java.lang.Object ref = sender_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sender_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasTimestamp()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasText()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSender()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, timestamp_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, text_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, sender_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, timestamp_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, text_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, sender_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText)) {
+        return super.equals(obj);
+      }
+      friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText other = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) obj;
+
+      boolean result = true;
+      result = result && (hasTimestamp() == other.hasTimestamp());
+      if (hasTimestamp()) {
+        result = result && (getTimestamp()
+            == other.getTimestamp());
+      }
+      result = result && (hasText() == other.hasText());
+      if (hasText()) {
+        result = result && getText()
+            .equals(other.getText());
+      }
+      result = result && (hasSender() == other.hasSender());
+      if (hasSender()) {
+        result = result && getSender()
+            .equals(other.getSender());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getTimestamp());
+      }
+      if (hasText()) {
+        hash = (37 * hash) + TEXT_FIELD_NUMBER;
+        hash = (53 * hash) + getText().hashCode();
+      }
+      if (hasSender()) {
+        hash = (37 * hash) + SENDER_FIELD_NUMBER;
+        hash = (53 * hash) + getSender().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code mymqttmessages.PBText}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:mymqttmessages.PBText)
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTextOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBText_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBText_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.class, friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.Builder.class);
+      }
+
+      // Construct using friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        timestamp_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        text_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sender_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.internal_static_mymqttmessages_PBText_descriptor;
+      }
+
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText getDefaultInstanceForType() {
+        return friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance();
+      }
+
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText build() {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText buildPartial() {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText result = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.timestamp_ = timestamp_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.text_ = text_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.sender_ = sender_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) {
+          return mergeFrom((friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText other) {
+        if (other == friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText.getDefaultInstance()) return this;
+        if (other.hasTimestamp()) {
+          setTimestamp(other.getTimestamp());
+        }
+        if (other.hasText()) {
+          bitField0_ |= 0x00000002;
+          text_ = other.text_;
+          onChanged();
+        }
+        if (other.hasSender()) {
+          bitField0_ |= 0x00000004;
+          sender_ = other.sender_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasTimestamp()) {
+          return false;
+        }
+        if (!hasText()) {
+          return false;
+        }
+        if (!hasSender()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long timestamp_ ;
+      /**
+       * <code>required int64 timestamp = 1;</code>
+       */
+      public boolean hasTimestamp() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int64 timestamp = 1;</code>
+       */
+      public long getTimestamp() {
+        return timestamp_;
+      }
+      /**
+       * <code>required int64 timestamp = 1;</code>
+       */
+      public Builder setTimestamp(long value) {
+        bitField0_ |= 0x00000001;
+        timestamp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 timestamp = 1;</code>
+       */
+      public Builder clearTimestamp() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        timestamp_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object text_ = "";
+      /**
+       * <code>required string text = 2;</code>
+       */
+      public boolean hasText() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string text = 2;</code>
+       */
+      public java.lang.String getText() {
+        java.lang.Object ref = text_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            text_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string text = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTextBytes() {
+        java.lang.Object ref = text_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          text_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string text = 2;</code>
+       */
+      public Builder setText(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        text_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string text = 2;</code>
+       */
+      public Builder clearText() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        text_ = getDefaultInstance().getText();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string text = 2;</code>
+       */
+      public Builder setTextBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        text_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object sender_ = "";
+      /**
+       * <code>required string sender = 3;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string sender = 3;</code>
+       */
+      public java.lang.String getSender() {
+        java.lang.Object ref = sender_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            sender_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string sender = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSenderBytes() {
+        java.lang.Object ref = sender_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sender_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string sender = 3;</code>
+       */
+      public Builder setSender(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        sender_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string sender = 3;</code>
+       */
+      public Builder clearSender() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sender_ = getDefaultInstance().getSender();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string sender = 3;</code>
+       */
+      public Builder setSenderBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        sender_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:mymqttmessages.PBText)
+    }
+
+    // @@protoc_insertion_point(class_scope:mymqttmessages.PBText)
+    private static final friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText();
+    }
+
+    public static friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PBText>
+        PARSER = new com.google.protobuf.AbstractParser<PBText>() {
+      public PBText parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new PBText(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PBText> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBText> getParserForType() {
+      return PARSER;
+    }
+
+    public friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBText getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2602,15 +3665,20 @@ public final class ProtobufMessages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_mymqttmessages_PBMessage_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_mymqttmessages_PBGenericLocation_descriptor;
+    internal_static_mymqttmessages_PBLocation_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_mymqttmessages_PBGenericLocation_fieldAccessorTable;
+      internal_static_mymqttmessages_PBLocation_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_mymqttmessages_PBGenericText_descriptor;
+    internal_static_mymqttmessages_PBRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_mymqttmessages_PBGenericText_fieldAccessorTable;
+      internal_static_mymqttmessages_PBRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_mymqttmessages_PBText_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_mymqttmessages_PBText_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2620,16 +3688,19 @@ public final class ProtobufMessages {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024mymqttmessages.proto\022\016mymqttmessages\"\214" +
-      "\001\n\tPBMessage\022\016\n\006source\030\001 \002(\r\0225\n\010location" +
-      "\030e \001(\0132!.mymqttmessages.PBGenericLocatio" +
-      "nH\000\022-\n\004text\030f \001(\0132\035.mymqttmessages.PBGen" +
-      "ericTextH\000B\t\n\007msgtype\"h\n\021PBGenericLocati" +
-      "on\022\014\n\004time\030\001 \002(\003\022\020\n\010latidude\030\002 \002(\001\022\021\n\tlo" +
-      "ngitude\030\003 \002(\001\022\r\n\005speed\030\004 \002(\002\022\021\n\tavaliabl" +
-      "e\030\005 \002(\010\"-\n\rPBGenericText\022\014\n\004text\030\001 \002(\t\022\016" +
-      "\n\006sender\030\002 \002(\tB<\n(friendisnear.friendisn" +
-      "ear.mymqttmessagesB\020ProtobufMessages"
+      "\n\024mymqttmessages.proto\022\016mymqttmessages\"\254" +
+      "\001\n\tPBMessage\022\016\n\006source\030\001 \002(\r\022.\n\010location" +
+      "\030e \001(\0132\032.mymqttmessages.PBLocationH\000\022,\n\007" +
+      "request\030f \001(\0132\031.mymqttmessages.PBRequest" +
+      "H\000\022&\n\004text\030g \001(\0132\026.mymqttmessages.PBText" +
+      "H\000B\t\n\007msgtype\"f\n\nPBLocation\022\021\n\ttimestamp" +
+      "\030\001 \002(\003\022\020\n\010latidude\030\002 \002(\001\022\021\n\tlongitude\030\003 " +
+      "\002(\001\022\r\n\005speed\030\004 \002(\002\022\021\n\tavaliable\030\005 \002(\010\"?\n" +
+      "\tPBRequest\022\021\n\ttimestamp\030\001 \002(\003\022\016\n\006sender\030" +
+      "\002 \002(\t\022\017\n\007request\030\003 \002(\005\"9\n\006PBText\022\021\n\ttime",
+      "stamp\030\001 \002(\003\022\014\n\004text\030\002 \002(\t\022\016\n\006sender\030\003 \002(" +
+      "\tBF\n2friendisnear.friendisnear.utilities" +
+      ".mymqttmessagesB\020ProtobufMessages"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2648,19 +3719,25 @@ public final class ProtobufMessages {
     internal_static_mymqttmessages_PBMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_mymqttmessages_PBMessage_descriptor,
-        new java.lang.String[] { "Source", "Location", "Text", "Msgtype", });
-    internal_static_mymqttmessages_PBGenericLocation_descriptor =
+        new java.lang.String[] { "Source", "Location", "Request", "Text", "Msgtype", });
+    internal_static_mymqttmessages_PBLocation_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_mymqttmessages_PBGenericLocation_fieldAccessorTable = new
+    internal_static_mymqttmessages_PBLocation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_mymqttmessages_PBGenericLocation_descriptor,
-        new java.lang.String[] { "Time", "Latidude", "Longitude", "Speed", "Avaliable", });
-    internal_static_mymqttmessages_PBGenericText_descriptor =
+        internal_static_mymqttmessages_PBLocation_descriptor,
+        new java.lang.String[] { "Timestamp", "Latidude", "Longitude", "Speed", "Avaliable", });
+    internal_static_mymqttmessages_PBRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_mymqttmessages_PBGenericText_fieldAccessorTable = new
+    internal_static_mymqttmessages_PBRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_mymqttmessages_PBGenericText_descriptor,
-        new java.lang.String[] { "Text", "Sender", });
+        internal_static_mymqttmessages_PBRequest_descriptor,
+        new java.lang.String[] { "Timestamp", "Sender", "Request", });
+    internal_static_mymqttmessages_PBText_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_mymqttmessages_PBText_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_mymqttmessages_PBText_descriptor,
+        new java.lang.String[] { "Timestamp", "Text", "Sender", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

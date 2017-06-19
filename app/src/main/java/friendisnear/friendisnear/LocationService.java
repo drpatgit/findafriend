@@ -44,6 +44,8 @@ public class LocationService extends Service implements CommonActionLitener {
 
     private ProtoMessager protomessager;
 
+    private boolean stopService;
+
     public LocationService() {
         super();
         commons = CommonUtility.getInstance();
@@ -77,6 +79,7 @@ public class LocationService extends Service implements CommonActionLitener {
 
         @Override
         public void run() {
+            if(stopService) return;
             if(ContextCompat.checkSelfPermission(thisActivityContext,Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(thisActivityContext,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
                 if(mLocationManager != null) {
@@ -145,7 +148,18 @@ public class LocationService extends Service implements CommonActionLitener {
 
     @Override
     public void onDestroy() {
+        stopService = true;
+
         protomessager.close();
+        commons.removeFriendsChangedListener(this);
+        commons = null;
     }
+
+
+    /*public void onDestroy() {
+        System.out.println("LocationService destroyed");
+
+
+    }*/
 
 }

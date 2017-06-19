@@ -18,6 +18,12 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.ListView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.TreeMap;
+
 import friendisnear.friendisnear.LocationService.LocationBinder;
 import friendisnear.friendisnear.utilities.CommonUtility;
 import friendisnear.friendisnear.utilities.Friend;
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
 
         commons = CommonUtility.getInstance();
 
-        commons.setSharedPreferences(PreferenceManager.getDefaultSharedPreferences(this));
+        commons.setMainActivity(this); //PreferenceManager.getDefaultSharedPreferences(this));
 
         String userName = getSharedPreferences(PREF_USER_NAME, MODE_PRIVATE).getString(PREF_USER_NAME, "");
         //friends = new ArrayList<>();
@@ -94,10 +100,14 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        locationService.stopSelf();
+        //locationService.stopLocationService();
+        commons.saveFriendsToFile();
         PreferenceManager.getDefaultSharedPreferences(MainActivity.this).unregisterOnSharedPreferenceChangeListener(commons);
         commons.removeFriendsChangedListener(this);
+        commons = null;
         unbindService(locationConnection);
+        super.onDestroy();
     }
 
     //connect to the service
@@ -114,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            locationService = null;
+
         }
     };
 
@@ -164,7 +174,9 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
         }
     }
 
-    public LocationService getLocationService() { return locationService; }
+
+
+
 
     @Override
     public void onCommonAction(final Friend f, final CommonUtility.CommonAction action) {

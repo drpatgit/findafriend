@@ -16,6 +16,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
@@ -34,8 +35,9 @@ import android.support.v4.app.NavUtils;
 public class SettingsActivity extends AppCompatPreferenceActivity { //implements OnSharedPreferenceChangeListener {
 
 
-    public static final String SYNC_FREQUENCY = "sync_frequency";
+    public static final String PREF_SYNC_FREQUENCY = "sync_frequency";
     public static final String PREF_USER_NAME = "user_name";
+    public static final String PREF_ALERT_DISTANCE = "alert_distance";
 
     private MainActivity parent;
     private LocationService listener;
@@ -184,14 +186,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity { //implements
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference(SYNC_FREQUENCY));
+            bindPreferenceSummaryToValue(findPreference(PREF_SYNC_FREQUENCY));
         }
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                NavUtils.navigateUpFromSameTask(this.getActivity());
                 return true;
             }
             return super.onOptionsItemSelected(item);

@@ -2,12 +2,21 @@ package friendisnear.friendisnear.utilities;
 
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.preference.PreferenceManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
+import friendisnear.friendisnear.MainActivity;
 import friendisnear.friendisnear.SettingsActivity;
 
 /**
@@ -15,6 +24,8 @@ import friendisnear.friendisnear.SettingsActivity;
  */
 
 public class CommonUtility implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+
 
     public enum CommonAction {
         FRIEND_ADDED, FRIEND_ADD_FAILED, FRIEND_REMOVED, FRIEND_REMOVE_FAILED, FRIEND_STAT_CHANGED, FRIEND_LOCATION_CHANGED, USER_LOCATION_CHANGED, USERNAME_CHANGED, SYNC_TIME_CHANGED;
@@ -25,7 +36,9 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
     private ArrayList<CommonActionLitener> friendsListeners;
     private HashMap<String,Friend> friends;
     private Friend user;
+    private MainActivity mainActivity;
     private SharedPreferences preferences;
+    private float alertDistance;
     //private LocationService locationService;
 
     public static CommonUtility getInstance() {
@@ -33,7 +46,6 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
     }
 
     private CommonUtility() {
-        friends = new HashMap<>();
         friendsListeners = new ArrayList<>();
     }
 
@@ -79,7 +91,7 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
     }
 
     public void updateLocation(String topic, Location location) {
-        String friendName = topic.substring(ProtoMessager.TOPIC_PREFIX.length());
+        String friendName = topic.substring(Friend.TOPIC_PREFIX.length());
         Friend f = friends.get(friendName);
         if(f!= null) {
             f.setLocation(location);
@@ -87,8 +99,14 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
         }
     }
 
-    public void setSharedPreferences(SharedPreferences preferences) {
-        this.preferences = preferences;
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+        setSharedPreferences();
+        loadFriendsFromFile();
+    }
+
+    private void setSharedPreferences() {
+        preferences = PreferenceManager.getDefaultSharedPreferences(mainActivity);
         preferences.registerOnSharedPreferenceChangeListener(this);
         String userName = preferences.getString(SettingsActivity.PREF_USER_NAME,"Mustermann");
         if(userName != null) {
@@ -99,7 +117,7 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
 
     public int getSyncTime() {
         if(preferences != null) {
-            String value = preferences.getString(SettingsActivity.SYNC_FREQUENCY, "60");
+            String value = preferences.getString(SettingsActivity.PREF_SYNC_FREQUENCY, "60");
 
             return Integer.parseInt(value) * 1000;
         }
@@ -107,12 +125,56 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
         return 0;
     }
 
-    //public void setLocationService(LocationService locationService) { this.locationService = locationService; }
+    public void requestReceived(long timestamp, String sender, int request) {
+
+    }
+
+    public void messageReceived(long timestamp, String sender, String text) {
+
+    }
+
+    public float getAlertDistance() {return alertDistance; }
+
+
+    private void loadFriendsFromFile() {
+        File file = new File(mainActivity.getFilesDir(), "friendlist");
+
+        try {
+            FileInputStream f = new FileInputStream(file);
+            ObjectInputStream s = new ObjectInputStream(f);
+            friends = (HashMap<String,Friend>)s.readObject();
+            s.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (friends == null) {
+            friends = new HashMap<>();
+        }
+    }
+
+    public void saveFriendsToFile() {
+        File file = new File(mainActivity.getFilesDir(), "friendlist");
+
+        try {
+            FileOutputStream f = new FileOutputStream(file);
+            ObjectOutputStream s = new ObjectOutputStream(f);
+
+            s.writeObject(friends);
+            s.flush();
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
-            case SettingsActivity.SYNC_FREQUENCY:
+            case SettingsActivity.PREF_SYNC_FREQUENCY:
                 fireChangedEvent(null, CommonAction.SYNC_TIME_CHANGED);
                 break;
             case SettingsActivity.PREF_USER_NAME:
@@ -121,6 +183,13 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
                 user = newUser;
                 fireChangedEvent(user, CommonAction.USERNAME_CHANGED);
                 break;
+            case SettingsActivity.PREF_ALERT_DISTANCE:
+                try{
+                    alertDistance = Float.valueOf(sharedPreferences.getString(key, "0"));
+                } catch(NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
         }
     }
 

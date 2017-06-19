@@ -12,9 +12,11 @@ import java.io.StringReader;
 
 public class Friend implements Serializable {
     private String name;
-    private Location location;
-    private Location oldLocation;
+    private transient Location location;
     private boolean avaliable;
+
+    public final static String TOPIC_PREFIX = "friendisnear/";
+    public final static String TOPIC_REQUEST_PREFIX = TOPIC_PREFIX + "REQUEST/";
 
     public Friend(String name) {
         this.name = name;
@@ -36,18 +38,16 @@ public class Friend implements Serializable {
         return -1;
     }
 
-    public float getDistanceToOld() {
-        float result = getDistanceTo(oldLocation);
-        oldLocation = this.location;
-
-        return result;
-    }
-
     public Location getLocation() {return location;}
 
     public String getName() {
         return name;
     }
+
+    public String getTopic() { return TOPIC_PREFIX + name; }
+
+    public String getTopicRequest() {return TOPIC_REQUEST_PREFIX + name; }
+
 
     public boolean getAvaliable() {return avaliable;}
 

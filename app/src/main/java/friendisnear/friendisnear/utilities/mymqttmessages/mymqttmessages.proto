@@ -11,20 +11,28 @@ message PBMessage {
 	required uint32 source = 1;
 	
 	oneof msgtype {
-		PBGenericLocation location = 101;
-		PBGenericText text = 102; 		
+		PBLocation location = 101;
+        PBRequest request = 102;
+		PBText text = 103;
 	}
 }
 
-message PBGenericLocation {
-	required int64 time = 1;
+message PBLocation {
+	required int64 timestamp = 1;
 	required double latidude = 2;
 	required double longitude = 3;
 	required float speed = 4;
 	required bool avaliable = 5;
 }
 
-message PBGenericText {
-	required string text = 1;
-	required string sender = 2;
+message PBRequest {
+    required int64 timestamp = 1;
+    required string sender = 2;
+    required int32 request = 3;
+}
+
+message PBText {
+    required int64 timestamp = 1;
+	required string text = 2;
+	required string sender = 3;
 }

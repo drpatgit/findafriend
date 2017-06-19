@@ -22,6 +22,16 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_title_sync_frequency" />
 
+    <EditTextPreference
+        android:capitalize="none"
+        android:defaultValue="@string/pref_default_alert_distance"
+        android:inputType="textCapWords"
+        android:key="alert_distance"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_alert_distance" />
+
 
 
 
