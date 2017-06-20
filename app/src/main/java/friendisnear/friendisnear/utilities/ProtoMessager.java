@@ -26,9 +26,11 @@ import friendisnear.friendisnear.utilities.mymqttmessages.ProtobufMessages.PBTex
 public class ProtoMessager implements CommonActionLitener {
 	//private final static Logger LOG = LoggerFactory.getLogger(ProtoMessager.class);
 	public final static int REQUEST_FRIEND = 1;
-	public final static int REQUEST_APPOINTMENT = 2;
-	public final static int REQUEST_ACCEPT = 3;
-	public final static int REQUEST_DECLINE = 4;
+	public final static int REQUEST_ACCEPT_FRIEND = 2;
+	public final static int REQUEST_DECLINE_FRIEND = 3;
+	public final static int REQUEST_APPOINTMENT = 4;
+	public final static int REQUEST_ACCEPT_APPOINTMENT = 5;
+	public final static int REQUEST_DECLINE_APPOINTMENT = 6;
 
 
 	private final int qos = 0;
@@ -180,9 +182,10 @@ public class ProtoMessager implements CommonActionLitener {
 		//LOG.error("exception raised (2): error", me);
 	}
 
-	public void sendLocation(Location location) throws MqttException {if (connected && user != null && location != null) {
+	public void sendLocation(Location location) throws MqttException {
+		if (connected && user != null && location != null) {
 			//LOG.debug("Publishing message: {}", number);
-			MqttMessage message = genericLocationMessage(location);
+			MqttMessage message = locationMessage(location);
 			message.setQos(qos);
 			sampleClient.publish(user.getTopic(), message);
 			System.out.println("Publishing message: " + message.toString());
@@ -191,7 +194,7 @@ public class ProtoMessager implements CommonActionLitener {
 		}
 	}
 
-	private MqttMessage genericLocationMessage(Location location) {
+	private MqttMessage locationMessage(Location location) {
 		// General Message
 		ProtobufMessages.PBMessage.Builder builder = ProtobufMessages.PBMessage.newBuilder();
 		builder.setSource(clientId.hashCode());
@@ -206,19 +209,51 @@ public class ProtoMessager implements CommonActionLitener {
 		MqttMessage message = new MqttMessage(builder.build().toByteArray());
 		return message;
 	}
+
+	public void sendRequest(int request, Friend f) {
+		if(connected) {
+			MqttMessage message = requestMessage(request, f);
+			message.setQos(qos);
+			try {
+				sampleClient.publish(f.getTopicRequest(), message);
+			} catch (MqttException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Publishing message: " + message.toString());
+		}
+
+	}
+
+	private MqttMessage requestMessage(int request, Friend f) {
+		ProtobufMessages.PBMessage.Builder builder = ProtobufMessages.PBMessage.newBuilder();
+		builder.setSource(clientId.hashCode());
+
+		ProtobufMessages.PBRequest.Builder requestMessage = ProtobufMessages.PBRequest.newBuilder();
+		requestMessage.setTimestamp(System.currentTimeMillis());
+		requestMessage.setRequest(request);
+		requestMessage.setSender(user.getName());
+
+		builder.setRequest(requestMessage);
+		MqttMessage message = new MqttMessage(builder.build().toByteArray());
+		return message;
+	}
 	
-	public void sendText(String number, Friend target) throws MqttException {
+	public void sendText(String number, Friend target)  {
 		if (connected) {
 			//LOG.debug("Publishing message: {}", number);
-			MqttMessage message = genericTextMessage(number);
+			MqttMessage message = textMessage(number);
 			message.setQos(qos);
-			sampleClient.publish(target.getTopicRequest(), message);
+			try {
+				sampleClient.publish(target.getTopicRequest(), message);
+			} catch (MqttException e) {
+				e.printStackTrace();
+			}
 		} else {
 			//LOG.error("connect first before sending");
 		}
 	}
 	
-	private MqttMessage genericTextMessage(String number) {
+	private MqttMessage textMessage(String number) {
 		// General Message
 		ProtobufMessages.PBMessage.Builder builder = ProtobufMessages.PBMessage.newBuilder();
 		builder.setSource(clientId.hashCode());
@@ -276,6 +311,24 @@ public class ProtoMessager implements CommonActionLitener {
                 }
                 commons.updateUserLocation(null);
                 break;
+			case FRIEND_REQUEST:
+				sendRequest(REQUEST_FRIEND, f);
+				break;
+			case FRIEND_REQUEST_ACCEPT:
+				sendRequest(REQUEST_ACCEPT_FRIEND, f);
+				break;
+			case FRIEND_REQUEST_DECLINE:
+				sendRequest(REQUEST_DECLINE_FRIEND, f);
+				break;
+			case APPOINTMENT_REQUEST:
+				sendRequest(REQUEST_APPOINTMENT, f);
+				break;
+			case APPOINTMENT_REQUEST_ACCEPT:
+				sendRequest(REQUEST_ACCEPT_APPOINTMENT, f);
+				break;
+			case APPOINTMENT_REQUEST_DECLINE:
+				sendRequest(REQUEST_DECLINE_APPOINTMENT, f);
+				break;
 		}
 	}
 }

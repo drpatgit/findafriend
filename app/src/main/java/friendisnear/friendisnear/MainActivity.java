@@ -212,6 +212,12 @@ public class MainActivity extends AppCompatActivity implements CommonActionLiten
                     case USERNAME_CHANGED:
                         adapter.updateUser();
                         break;
+                    case FRIEND_REQUEST:
+                        Snackbar.make(view, f.getName() + " friend request sent", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        break;
+                    case APPOINTMENT_REQUEST:
+                        Snackbar.make(view, f.getName() + " appointment request sent", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        break;
                 }
             }
         });

@@ -31,9 +31,9 @@ public class FriendActivity extends AppCompatActivity {
                 if (!editText10.getText().toString().equals("")){
                     Intent returnIntent = new Intent();
                     Friend newFriend = new Friend(editText10.getText().toString());
-                    CommonUtility.getInstance().addFriend(newFriend);
-                    returnIntent.putExtra("result", newFriend);
-                    setResult(Activity.RESULT_OK, returnIntent);
+                    CommonUtility.getInstance().request(newFriend, CommonUtility.CommonAction.FRIEND_REQUEST);
+                    //returnIntent.putExtra("result", newFriend);
+                    //setResult(Activity.RESULT_OK, returnIntent);
                 }
                 finish();
             }

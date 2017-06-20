@@ -1,5 +1,8 @@
 package friendisnear.friendisnear.utilities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.preference.PreferenceManager;
@@ -28,7 +31,8 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
 
 
     public enum CommonAction {
-        FRIEND_ADDED, FRIEND_ADD_FAILED, FRIEND_REMOVED, FRIEND_REMOVE_FAILED, FRIEND_STAT_CHANGED, FRIEND_LOCATION_CHANGED, USER_LOCATION_CHANGED, USERNAME_CHANGED, SYNC_TIME_CHANGED;
+        FRIEND_ADDED, FRIEND_ADD_FAILED, FRIEND_REMOVED, FRIEND_REMOVE_FAILED, FRIEND_STAT_CHANGED, FRIEND_LOCATION_CHANGED, USER_LOCATION_CHANGED, USERNAME_CHANGED, SYNC_TIME_CHANGED,
+        FRIEND_REQUEST, FRIEND_REQUEST_ACCEPT, FRIEND_REQUEST_DECLINE, APPOINTMENT_REQUEST, APPOINTMENT_REQUEST_ACCEPT, APPOINTMENT_REQUEST_DECLINE;
     }
 
     private static final CommonUtility ourInstance = new CommonUtility();
@@ -125,7 +129,93 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
         return 0;
     }
 
-    public void requestReceived(long timestamp, String sender, int request) {
+    public void requestReceived(long timestamp, final String sender, final int request) {
+        mainActivity.runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mainActivity);
+
+                final Friend f = new Friend(sender);
+
+                switch(request) {
+                    case ProtoMessager.REQUEST_FRIEND:
+                        dialogBuilder.setTitle("Friend Request");
+                        dialogBuilder.setMessage(sender + " would like to add you to the friendlist.");
+                        dialogBuilder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fireChangedEvent(f, CommonAction.FRIEND_REQUEST_ACCEPT);
+                                addFriend(f);
+                            }
+                        });
+
+                        dialogBuilder.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fireChangedEvent(f, CommonAction.FRIEND_REQUEST_DECLINE);
+                            }
+                        });
+                        break;
+                    case ProtoMessager.REQUEST_ACCEPT_FRIEND:
+                        dialogBuilder.setTitle("Friend Request");
+                        dialogBuilder.setMessage(sender + " accepted your friend request.");
+                        dialogBuilder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                addFriend(f);
+                            }
+                        });
+                        break;
+                    case ProtoMessager.REQUEST_DECLINE_FRIEND:
+                        dialogBuilder.setTitle("Friend Request");
+                        dialogBuilder.setMessage(sender + " declined your friend request.");
+                        dialogBuilder.setNeutralButton("OK", null);
+                        break;
+
+                    case ProtoMessager.REQUEST_APPOINTMENT:
+                        dialogBuilder.setTitle("Appointment Request");
+                        dialogBuilder.setMessage(sender + " would like to meet with you.");
+                        dialogBuilder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fireChangedEvent(f, CommonAction.APPOINTMENT_REQUEST_ACCEPT);
+                            }
+                        });
+
+                        dialogBuilder.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fireChangedEvent(f, CommonAction.APPOINTMENT_REQUEST_DECLINE);
+                            }
+                        });
+                        break;
+
+                    case ProtoMessager.REQUEST_ACCEPT_APPOINTMENT:
+                        dialogBuilder.setTitle("Appointment Request");
+                        dialogBuilder.setMessage(sender + " acceped your appointment request.");
+                        dialogBuilder.setNeutralButton("OK", null);
+                        break;
+
+                    case ProtoMessager.REQUEST_DECLINE_APPOINTMENT:
+                        dialogBuilder.setTitle("Appointment Request");
+                        dialogBuilder.setMessage(sender + " declined your appointment request.");
+                        dialogBuilder.setNeutralButton("OK", null);
+                        break;
+                }
+                dialogBuilder.create().show();
+            }
+        });
+
+    }
+
+    public void request(Friend f, CommonUtility.CommonAction action) {
+        switch(action) {
+            case FRIEND_REQUEST:
+            case APPOINTMENT_REQUEST:
+                fireChangedEvent(f, action);
+                break;
+        }
 
     }
 
@@ -137,6 +227,8 @@ public class CommonUtility implements SharedPreferences.OnSharedPreferenceChange
 
 
     private void loadFriendsFromFile() {
+        friends = new HashMap<>();
+        if(true) return;
         File file = new File(mainActivity.getFilesDir(), "friendlist");
 
         try {
